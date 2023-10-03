@@ -24,6 +24,7 @@ function Header() {
           src="/logo_b.mp4"
           autoPlay
           loop
+          playsInline
           muted
           width={520}
           height={200}
