@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Iosevka Web';
+    src: url('/iosevka-light.ttf') format('truetype');
+  }
+ 
+  
+  @font-face {
+    font-family: 'Dissolved Exchange Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url('/Dissolved Exchange.woff') format('woff');
+    }
