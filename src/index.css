@@ -5,8 +5,6 @@
 
   color: rgba(0, 0, 0, 0.87);
 
-  cursor: none;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -52,7 +50,6 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
 
 ::-moz-selection {
   background-color: lightgreen;

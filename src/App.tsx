@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import "./font.css";
 
+const headerVideo = "/logo_b.mp4";
+
 function Header() {
   return (
     <motion.div
@@ -21,7 +23,7 @@ function Header() {
         }}
       >
         <video
-          src="/logo_b.mp4"
+          src={headerVideo}
           autoPlay
           loop
           playsInline
@@ -37,19 +39,7 @@ function Header() {
   );
 }
 
-const initLine = [
-  "🌈",
-  "✨",
-  "🎵",
-  "🌱",
-  "💿",
-  "🎹",
-  "🎶",
-  "🎧",
-  "🎤",
-  "🐶",
-  "🐹",
-];
+const initLine = ["🌈", "✨", "🎵", "🌱", "💿", "🎹", "🎶", "🎧", "🎤", "🐶"];
 const initLines = [...initLine, ...initLine];
 function RainbowLine() {
   const [lines, setLines] = useState<Array<string>>(initLines);
@@ -121,20 +111,6 @@ const emotions: Emotions = {
     color: "white",
   },
 };
-
-function Highlight({ text, emotion }: { text: string; emotion: string }) {
-  return (
-    <div
-      style={{
-        backgroundColor: emotions[emotion]?.backgroundColor,
-        color: emotions[emotion]?.color,
-        display: "inline-block",
-      }}
-    >
-      {text}
-    </div>
-  );
-}
 
 function Subtitle({ title }: { title: string }) {
   return (
