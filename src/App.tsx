@@ -200,7 +200,18 @@ function Description() {
   );
 }
 
+const displayHackerDefenceConsole = () => {
+  const consoleText = `if you are a hacker, please do not hack me instead listen to my music.`;
+  console.log(
+    `%c${consoleText}`,
+    "background-color: rgb(255, 164, 244); color: white; font-size: 24px; border-radius: 8px; padding: 8px;"
+  );
+};
+
 function App() {
+  useEffect(() => {
+    displayHackerDefenceConsole();
+  }, []);
   return (
     <div
       style={{

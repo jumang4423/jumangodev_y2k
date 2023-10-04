@@ -5,7 +5,7 @@ import "./index.css";
 import AnimatedCursor from "react-animated-cursor";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <>
     <App />
     <AnimatedCursor
       innerSize={16}
@@ -15,5 +15,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       innerScale={0.7}
       outerScale={5}
     />
-  </React.StrictMode>
+  </>
 );
