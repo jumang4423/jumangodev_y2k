@@ -16,6 +16,7 @@ function Header() {
       }}
     >
       <motion.div
+        className="header-video-container"
         initial={{ scaleX: 1.0, scaleY: 0 }}
         whileTap={{ scaleY: 0 }}
         animate={{
@@ -158,9 +159,18 @@ function Description() {
     <div style={{}}>
       <Subtitle title="about" />
       <div>
-        jumango(@jumang4423) is a bedroom producer and hacker from japan.
+        jumango(@jumang4423) is a bedroom producer and haxOr from japan.
       </div>
-      <div>i make futuristic music and software.</div>
+      <div>i make futuristic e/acc music and software.</div>
+      <Subtitle title="patreon/donation" />
+      <div>
+        <SoundCloudLinkCard
+          href="https://etherscan.io/address/0x4bd46fe39b1630915687b4edd3de582c85c20bf9"
+          title="0x4bd46fe39b1630915687b4edd3de582c85c20bf9"
+          imgSrc="/ether.svg"
+        />
+        <div>patreon is coming soon.</div>
+      </div>
       <Subtitle title="find me" />
       <div>
         <div>jumango's work is most audible via:</div>
@@ -217,17 +227,11 @@ function App() {
       style={{
         fontFamily: "Iosevka Web, Transparent",
         maxWidth: "500px",
-        margin: "0 0 0 0",
-        height: "100vh",
-        width: "100vw",
-        overflow: "hidden",
-        position: "relative",
         fontSize: "18px",
       }}
     >
       <Header />
       <Description />
-      <RainbowLine />
     </div>
   );
 }
