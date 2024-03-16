@@ -24,8 +24,15 @@
   color: #888;
 }
 
+.header-smartphone-container {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .header-video-container {
     display: none;
+  }
+  .header-smartphone-container {
+    display: block;
   }
 }
