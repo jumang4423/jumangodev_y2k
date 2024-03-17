@@ -31,6 +31,7 @@
 @media (max-width: 768px) {
   .header-video-container {
     display: none;
+    margin-left: 0;
   }
   .header-smartphone-container {
     display: block;

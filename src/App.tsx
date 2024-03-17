@@ -35,6 +35,8 @@ function Header() {
           muted
           width={500}
           style={{
+            marginLeft: "-8px",
+            marginTop: "4px",
             objectFit: "cover",
           }}
         />
@@ -43,9 +45,9 @@ function Header() {
         className="header-smartphone-container"
         style={{
           marginTop: "8px",
+          marginLeft: "-32px",
           justifyContent: "center",
           alignItems: "center",
-          display: "flex",
           flexDirection: "column",
         }}
       >
