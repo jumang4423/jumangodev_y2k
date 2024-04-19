@@ -15,7 +15,7 @@ function Header() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "-8px",
+        marginTop: "-12px",
         marginBottom: "-8px",
       }}
     >
@@ -155,6 +155,19 @@ function Description() {
     playbackRate,
   });
   const plays = [play1, play2, play3];
+  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.async = true;
+    script.defer = true;
+    script.src = "//assets.pinterest.com/js/pinit.js";
+    script.onload = () => {
+      setIsScriptLoaded(true);
+    };
+    document.body.appendChild(script);
+  }, []);
+
   const onPlay = () => {
     const randomPlay = plays[Math.floor(Math.random() * plays.length)];
     randomPlay();
@@ -292,22 +305,46 @@ function Description() {
           marginTop: "8px",
         }}
       >
-        <script
-          type="text/javascript"
-          async
-          defer
-          src="//assets.pinterest.com/js/pinit.js"
-        />
         <a
           style={{
-            display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            display: isScriptLoaded ? "flex" : "none",
           }}
           data-pin-do="embedUser"
-          href="https://www.pinterest.com/jumang4423/"
-        ></a>
+          href={"https://www.pinterest.com/jumang4423/"}
+        />
       </div>
+      <Subtitle title="harbot" />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <iframe
+          src="https://weep.page/harbot/"
+          style={{
+            border: "none",
+            marginTop: "8px",
+            width: "135px",
+            height: "210px",
+            marginBottom: "16px",
+          }}
+          scrolling="no"
+        />
+        <div
+          style={{
+            marginLeft: "16px",
+            marginTop: "8px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          「Harbot」は、アクセスカウンターやゲストブック、リンク集といった個人ホームページでよく使われる機能を、可愛いキャラクターとともに支援するサービスだ。
+        </div>
+      </div>
+      <div style={{ marginBottom: 256 }}></div>
     </div>
   );
 }
