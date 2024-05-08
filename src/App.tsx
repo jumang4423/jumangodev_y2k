@@ -183,12 +183,11 @@ function Description() {
     >
       <Subtitle title="about" />
       <div>
-        jumango(@jumang4423) is a musician and hacker in Japan, making
-        futuristic d/acc music and software
+        jumango(@jumang4423) is a musician and hacker in japan, making
+        futuristic d/acc music and software. 
       </div>
       <div>
-        regularly i experiment with new technologies and find ways to understand
-        gen alpha
+        natto, guaba and mango are his favorite foods
       </div>
       <div>
         <SoundCloudLinkCard
@@ -233,7 +232,7 @@ function Description() {
           </Link>
         </div>
       </div>
-      <Subtitle title="releases" />
+      <Subtitle title="music" />
       available on soundcloud:
       <div
         style={{
@@ -323,7 +322,7 @@ function Description() {
         }}
       >
         <iframe
-          src="https://weep.page/harbot/"
+          src="https://weepjp.neocities.org/harbot/"
           style={{
             border: "none",
             marginTop: "8px",
