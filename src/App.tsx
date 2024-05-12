@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useSound from "use-sound";
 import "./App.css";
 import "./font.css";
@@ -8,6 +8,86 @@ import hov_2 from "/hov_2.mp3";
 import hov_3 from "/hov_3.mp3";
 const headerVideo = "/logo_b.mp4";
 
+const soft = [
+  "cj_v74cl_hacks",
+  "treed-gpt",
+  "gameboy-rs",
+  "jumangodev_y2k",
+  "sc_private_miner",
+  "nylang",
+  "nylisp",
+  "pen.el",
+  "who_unfollowed_sc_batch",
+  "power_tone",
+  "surveillance_list",
+  "ghidra_gpt3",
+  "screamdb",
+  "chip8-rs",
+  "rust_path_tracer",
+  "nysh",
+  "dog_rotation",
+  "jungle98",
+  "hack-the-music",
+  "hentai_dream_95",
+];
+
+const music = [
+  {
+    title: "tuna",
+    href: "https://soundcloud.com/jumang4423/2na",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-TXubNLB7Erl1yJqy-DtAWSA-t500x500.jpg",
+  },
+  {
+    title: "lazydoll away (remix)",
+    href: "https://soundcloud.com/jumang4423/lazydoll-away-jumango-remix",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-1PB8WApUghwg1BUx-V0V0DA-t500x500.jpg",
+  },
+  {
+    title: "twinkle",
+    href: "https://soundcloud.com/jumang4423/twinkle",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-EPu65YpZOrOimCxH-xKyKhw-t500x500.jpg",
+  },
+  {
+    title: "frail",
+    href: "https://soundcloud.com/jumang4423/frail",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-dzLoHPQgjDSU2a1m-2yoiIg-t500x500.jpg",
+  },
+  {
+    title: "trip",
+    href: "https://soundcloud.com/jumang4423/trip",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-8Tz5URmo6iE8y0PL-JRLk4A-t500x500.jpg",
+  },
+  {
+    title: "blanket",
+    href: "https://soundcloud.com/jumang4423/blanket",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-1byv2IPH6K2T7CJC-PYdCpQ-t500x500.jpg",
+  },
+  {
+    title: "loop",
+    href: "https://soundcloud.com/jumang4423/loop",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-1PB8WApUghwg1BUx-V0V0DA-t500x500.jpg",
+  },
+  {
+    title: "me",
+    href: "https://soundcloud.com/jumang4423/me-by-jumango",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-1PB8WApUghwg1BUx-V0V0DA-t500x500.jpg",
+  },
+  {
+    title: "finally",
+    href: "https://soundcloud.com/jumang4423/finally",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-1PB8WApUghwg1BUx-V0V0DA-t500x500.jpg",
+  },
+];
+
 function Header() {
   return (
     <motion.div
@@ -15,7 +95,7 @@ function Header() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "-12px",
+        marginTop: "-16px",
         marginBottom: "-8px",
       }}
     >
@@ -184,11 +264,9 @@ function Description() {
       <Subtitle title="about" />
       <div>
         jumango(@jumang4423) is a musician and hacker in japan, making
-        futuristic d/acc music and software. 
+        futuristic d/acc music and software.
       </div>
-      <div>
-        natto, guaba and mango are his favorite foods
-      </div>
+      <div>natto, guaba and mango are his favorite foods</div>
       <div>
         <SoundCloudLinkCard
           href="https://etherscan.io/address/0x4bd46fe39b1630915687b4edd3de582c85c20bf9"
@@ -232,71 +310,51 @@ function Description() {
           </Link>
         </div>
       </div>
-      <Subtitle title="music" />
-      available on soundcloud:
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          alignItems: "center",
-          gap: "0px 8px",
-        }}
-      >
-        <SoundCloudLinkCard
-          href="https://soundcloud.com/jumang4423/2na"
-          title="tuna"
-          onPlay={onPlay}
-          imgSrc="https://i1.sndcdn.com/artworks-TXubNLB7Erl1yJqy-DtAWSA-t500x500.jpg"
-        />
-        <SoundCloudLinkCard
-          href="https://soundcloud.com/jumang4423/lazydoll-away-jumango-remix"
-          title="lazydoll away (remix)"
-          onPlay={onPlay}
-          imgSrc="https://i1.sndcdn.com/artworks-1PB8WApUghwg1BUx-V0V0DA-t500x500.jpg"
-        />
-        <SoundCloudLinkCard
-          href="https://soundcloud.com/jumang4423/twinkle"
-          onPlay={onPlay}
-          title="twinkle"
-          imgSrc="https://i1.sndcdn.com/artworks-EPu65YpZOrOimCxH-xKyKhw-t500x500.jpg"
-        />
-        <SoundCloudLinkCard
-          href="https://soundcloud.com/jumang4423/frail"
-          onPlay={onPlay}
-          title="frail"
-          imgSrc="https://i1.sndcdn.com/artworks-dzLoHPQgjDSU2a1m-2yoiIg-t500x500.jpg"
-        />
-        <SoundCloudLinkCard
-          href="https://soundcloud.com/jumang4423/trip"
-          title="trip"
-          imgSrc="https://i1.sndcdn.com/artworks-8Tz5URmo6iE8y0PL-JRLk4A-t500x500.jpg"
-          onPlay={onPlay}
-        />
-        <SoundCloudLinkCard
-          href="https://soundcloud.com/jumang4423/blanket"
-          onPlay={onPlay}
-          title="blanket"
-          imgSrc="https://i1.sndcdn.com/artworks-1byv2IPH6K2T7CJC-PYdCpQ-t500x500.jpg"
-        />
-        <SoundCloudLinkCard
-          href="https://soundcloud.com/jumang4423/loop"
-          onPlay={onPlay}
-          title="loop"
-          imgSrc="https://i1.sndcdn.com/artworks-1PB8WApUghwg1BUx-V0V0DA-t500x500.jpg"
-        />
-        <SoundCloudLinkCard
-          href="https://soundcloud.com/jumang4423/me-by-jumango"
-          onPlay={onPlay}
-          title="me"
-          imgSrc="https://i1.sndcdn.com/artworks-1PB8WApUghwg1BUx-V0V0DA-t500x500.jpg"
-        />
-        <SoundCloudLinkCard
-          href="https://soundcloud.com/jumang4423/finally"
-          onPlay={onPlay}
-          title="finally"
-          imgSrc="https://i1.sndcdn.com/artworks-1PB8WApUghwg1BUx-V0V0DA-t500x500.jpg"
-        />
+      <div style={{ marginTop: "4px" }}>
+        <Subtitle title="music" />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: "0px 4px",
+            marginTop: "-4px",
+          }}
+        >
+          {music.map((m) => (
+            <SoundCloudLinkCard
+              href={m.href}
+              title={m.title}
+              onPlay={onPlay}
+              imgSrc={m.imgSrc}
+            />
+          ))}
+        </div>
+      </div>
+      <div style={{ marginTop: "4px" }}>
+        <Subtitle title="software" />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: "8px 0px",
+            marginTop: "4px",
+            marginBottom: "4px",
+          }}
+        >
+          {soft.map((m: string, i: number) => (
+            <Link
+              href={`https://github.com/jumang4423/${m}`}
+              onPlay={onPlay}
+              key={i}
+            >
+              {m}
+            </Link>
+          ))}
+        </div>
       </div>
       <Subtitle title="pinterest" />
       <div
