@@ -96,7 +96,7 @@ function Header() {
         justifyContent: "center",
         alignItems: "center",
         marginTop: "-16px",
-        marginBottom: "-8px",
+        marginBottom: "-12px",
       }}
     >
       <motion.div
@@ -421,7 +421,7 @@ function App() {
   return (
     <div
       style={{
-        fontFamily: "Iosevka Aile Iaso, Transparent",
+        fontFamily: "Iosevka Aile Iaso, Kiwi Maru, Transparent",
         maxWidth: "500px",
         fontSize: "18px",
       }}
@@ -429,6 +429,11 @@ function App() {
       <link
         rel="stylesheet"
         href="https://cdn.xeiaso.net/static/css/iosevka/family.css"
+      />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap"
+        rel="stylesheet"
       />
       <Header />
       <Description />
