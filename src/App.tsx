@@ -103,8 +103,10 @@ function Header() {
         alignItems: "center",
         marginTop: "-16px",
         marginBottom: "-12px",
+        flexDirection: "column",
       }}
     >
+      <video src={captcha} autoPlay loop playsInline muted width={500} style={{marginLeft: "-8px", marginTop: "-8px", objectFit: "cover"}} className="header-video-container"/>
       <motion.div
         className="header-video-container"
         initial={{ scaleX: 1.0, scaleY: 0 }}
@@ -113,7 +115,6 @@ function Header() {
           scaleY: 1.0,
         }}
       >
-      <video src={captcha} autoPlay loop playsInline muted width={500} style={{marginLeft: "-8px", marginTop: "-8px", objectFit: "cover"}} />
         <video
           src={headerVideo}
           autoPlay
@@ -123,7 +124,7 @@ function Header() {
           width={500}
           style={{
             marginLeft: "-8px",
-            marginTop: "4px",
+            marginTop: "-12px",
             objectFit: "cover",
           }}
         />
