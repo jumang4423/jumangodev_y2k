@@ -7,7 +7,7 @@ import hov_1 from "/hov_1.mp3";
 import hov_2 from "/hov_2.mp3";
 import hov_3 from "/hov_3.mp3";
 const headerVideo = "/logo_b.mp4";
-const captcha = "/captcha.mp4"
+const captcha = "/captcha.mp4";
 const soft = [
   "cj_v74cl_hacks",
   "treed-gpt",
@@ -106,29 +106,21 @@ function Header() {
         flexDirection: "column",
       }}
     >
-      <video src={captcha} autoPlay loop playsInline muted width={500} style={{marginLeft: "-8px", marginTop: "-8px", objectFit: "cover"}} className="header-video-container"/>
-      <motion.div
-        className="header-video-container"
-        initial={{ scaleX: 1.0, scaleY: 0 }}
-        whileTap={{ scaleY: 0 }}
-        animate={{
-          scaleY: 1.0,
+      <video
+        src={captcha}
+        autoPlay
+        loop
+        playsInline
+        muted
+        width={500}
+        style={{
+          marginLeft: "-8px",
+          marginTop: "-16px",
+          objectFit: "cover",
+          filter: "brightness(1.01)",
         }}
-      >
-        <video
-          src={headerVideo}
-          autoPlay
-          loop
-          playsInline
-          muted
-          width={500}
-          style={{
-            marginLeft: "-8px",
-            marginTop: "-12px",
-            objectFit: "cover",
-          }}
-        />
-      </motion.div>
+        className="header-video-container"
+      />
       <div
         className="header-smartphone-container"
         style={{
