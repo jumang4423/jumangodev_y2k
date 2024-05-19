@@ -33,6 +33,12 @@ const soft = [
 
 const music = [
   {
+    title: "captcha",
+    href: "https://soundcloud.com/jumang4423/captcha",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-57i5LYJ8UyHmbkYl-xUy6aQ-t500x500.jpg",
+  },
+  {
     title: "tuna",
     href: "https://soundcloud.com/jumang4423/2na",
     imgSrc:
