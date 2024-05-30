@@ -289,24 +289,23 @@ function Description() {
           <Link href="https://soundcloud.com/jumang4423/" onPlay={onPlay}>
             soundcloud
           </Link>
-          ,
           <Link onPlay={onPlay} href="https://jumango.bandcamp.com/">
             bandcamp
           </Link>
-          ,
           <Link onPlay={onPlay} href="https://github.com/jumang4423/">
             github
           </Link>
-          ,
+          <Link onPlay={onPlay} href="https://twitter.com/jumang4423/">
+            x(twitter)
+          </Link>
           <Link
             onPlay={onPlay}
             href="https://vrchat.com/home/user/usr_4b57f0ea-9bb7-4a9a-9f6c-42b3734c9ee3/"
           >
             vrchat
           </Link>
-          <pre style={{ margin: "0px" }}>{" or"}</pre>
-          <Link onPlay={onPlay} href="https://twitter.com/jumang4423/">
-            x(twitter)
+          <Link onPlay={onPlay} href="https://scrapbox.io/jumang4423/">
+            scrapbox
           </Link>
         </div>
       </div>
