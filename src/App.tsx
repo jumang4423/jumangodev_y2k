@@ -6,15 +6,15 @@ import "./font.css";
 import hov_1 from "/hov_1.mp3";
 import hov_2 from "/hov_2.mp3";
 import hov_3 from "/hov_3.mp3";
-const headerVideo = "/logo_b.mp4";
 const captcha = "/captcha.mp4";
 const soft = [
-  "cj_v74cl_hacks",
   "treed-gpt",
   "gameboy-rs",
-  "jumangodev_y2k",
   "sc_private_miner",
   "nylang",
+  "family_king_joystick_hack",
+  "cj_v74cl_hacks",
+  "jumangodev_y2k",
   "nylisp",
   "pen.el",
   "who_unfollowed_sc_batch",
@@ -23,12 +23,12 @@ const soft = [
   "ghidra_gpt3",
   "screamdb",
   "chip8-rs",
+  "hentai_dream_95",
   "rust_path_tracer",
   "nysh",
   "dog_rotation",
   "jungle98",
   "hack-the-music",
-  "hentai_dream_95",
 ];
 
 const music = [
