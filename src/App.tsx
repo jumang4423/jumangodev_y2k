@@ -264,11 +264,7 @@ function Description() {
       }}
     >
       <Subtitle title="about" />
-      <div>
-        jumango(@jumang4423) is a musician and hacker in japan, making
-        futuristic d/acc music and software.
-      </div>
-      <div>natto, guaba and mango are his favorite foods</div>
+      <div>i make music and visuals from japan </div>
       <div>
         <SoundCloudLinkCard
           href="https://etherscan.io/address/0x4bd46fe39b1630915687b4edd3de582c85c20bf9"
