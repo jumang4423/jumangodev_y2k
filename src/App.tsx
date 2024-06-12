@@ -147,21 +147,23 @@ function Link({
   children,
   href,
   onPlay,
+  disabled = false,
 }: {
   children: any;
   href: string;
   onPlay: () => void;
+  disabled?: boolean;
 }) {
   return (
     <motion.a
       initial={{ scale: 1.0 }}
-      whileHover={{ scale: 1.25 }}
-      href={href}
+      whileHover={{ scale: disabled ? 1.0 : 1.25 }}
+      href={disabled ? "#" : href}
       target="_blank"
       rel="noreferrer"
       style={{
         marginLeft: "8px",
-        backgroundColor: "rgb(255, 164, 244)",
+        backgroundColor: disabled ? "rgb(164, 164, 164)" : "rgb(255, 164, 244)",
         color: "white",
         textDecoration: "underline",
         fontWeight: "normal",
@@ -295,7 +297,7 @@ function Description() {
           <Link onPlay={onPlay} href="https://github.com/jumang4423/">
             github
           </Link>
-          <Link onPlay={onPlay} href="https://twitter.com/jumang4423/">
+          <Link onPlay={onPlay} href="https://twitter.com/jumang4423/" disabled>
             x(twitter)
           </Link>
           <Link
