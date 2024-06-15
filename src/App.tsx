@@ -163,10 +163,11 @@ function Link({
       rel="noreferrer"
       style={{
         marginLeft: "8px",
-        backgroundColor: disabled ? "rgb(164, 164, 164)" : "rgb(255, 164, 244)",
+        backgroundColor: "rgb(255, 164, 244)",
         color: "white",
         textDecoration: "underline",
         fontWeight: "normal",
+        filter: `opacity(${disabled ? 0.3 : 1.0})`,
       }}
       onClick={() => {
         onPlay();
@@ -183,13 +184,13 @@ function Subtitle({ title }: { title: string }) {
       style={{
         display: "flex",
         alignItems: "center",
-        fontSize: "32px",
+        fontSize: "28px",
         fontFamily: "Dissolved Exchange Regular",
         color: "rgb(255, 164, 244)",
+        marginBottom: "-8px",
       }}
     >
-      <img src="/flower01.png" width={32} height={32} />
-      <div style={{ display: "inline-block", marginLeft: "8px" }}>{title}</div>
+      <div style={{ display: "inline-block", marginLeft: "0px" }}>{title}</div>
     </div>
   );
 }
@@ -264,7 +265,11 @@ function Description() {
       }}
     >
       <Subtitle title="about" />
-      <div>i make music and visuals from japan </div>
+      <div
+      style={{
+        marginBottom: "-10px"
+      }}
+      >i make music and visuals from japan </div>
       <div>
         <SoundCloudLinkCard
           href="https://etherscan.io/address/0x4bd46fe39b1630915687b4edd3de582c85c20bf9"
