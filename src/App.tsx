@@ -266,10 +266,12 @@ function Description() {
     >
       <Subtitle title="about" />
       <div
-      style={{
-        marginBottom: "-10px"
-      }}
-      >i make music and visuals from japan </div>
+        style={{
+          marginBottom: "-10px",
+        }}
+      >
+        i make music and visuals from japan{" "}
+      </div>
       <div>
         <SoundCloudLinkCard
           href="https://etherscan.io/address/0x4bd46fe39b1630915687b4edd3de582c85c20bf9"
@@ -292,13 +294,13 @@ function Description() {
           <Link href="https://soundcloud.com/jumang4423/" onPlay={onPlay}>
             soundcloud
           </Link>
-          <Link onPlay={onPlay} href="https://jumango.bandcamp.com/">
-            bandcamp
+          <Link onPlay={onPlay} href="https://scrapbox.io/jumang4423/">
+            scrapbox
           </Link>
           <Link onPlay={onPlay} href="https://github.com/jumang4423/">
             github
           </Link>
-          <Link onPlay={onPlay} href="https://twitter.com/jumang4423/" disabled>
+          <Link onPlay={onPlay} href="https://twitter.com/jumang4423/">
             x(twitter)
           </Link>
           <Link
@@ -307,8 +309,8 @@ function Description() {
           >
             vrchat
           </Link>
-          <Link onPlay={onPlay} href="https://scrapbox.io/jumang4423/">
-            scrapbox
+          <Link onPlay={onPlay} href="https://jumango.bandcamp.com/">
+            bandcamp
           </Link>
         </div>
       </div>
