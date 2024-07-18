@@ -31,6 +31,8 @@ const soft = [
   "hack-the-music",
 ];
 
+const pink = "rgb(255, 184, 244)";
+
 const music = [
   {
     title: "captcha",
@@ -91,6 +93,13 @@ const music = [
     href: "https://soundcloud.com/jumang4423/finally",
     imgSrc:
       "https://i1.sndcdn.com/artworks-1PB8WApUghwg1BUx-V0V0DA-t500x500.jpg",
+  },
+];
+
+const kewl_ppl = [
+  {
+    title: "viwiv",
+    href: "https://soundcloud.com/viwiv2020",
   },
 ];
 
@@ -163,7 +172,7 @@ function Link({
       rel="noreferrer"
       style={{
         marginLeft: "8px",
-        backgroundColor: "rgb(255, 164, 244)",
+        backgroundColor: pink,
         color: "white",
         textDecoration: "underline",
         fontWeight: "normal",
@@ -186,7 +195,7 @@ function Subtitle({ title }: { title: string }) {
         alignItems: "center",
         fontSize: "28px",
         fontFamily: "Dissolved Exchange Regular",
-        color: "rgb(255, 164, 244)",
+        color: pink,
         marginBottom: "-8px",
       }}
     >
@@ -346,7 +355,7 @@ function Description() {
             alignItems: "center",
             gap: "8px 0px",
             marginTop: "4px",
-            marginBottom: "4px",
+            marginBottom: "-4px",
           }}
         >
           {soft.map((m: string, i: number) => (
@@ -360,6 +369,27 @@ function Description() {
           ))}
         </div>
       </div>
+      <div style={{ marginTop: "4px" }}>
+        <Subtitle title="cool people" />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: "8px 0px",
+            marginTop: "4px",
+            marginBottom: "4px",
+          }}
+        >
+          {kewl_ppl.map((m, i: number) => (
+            <Link href={m.href} onPlay={onPlay} key={i}>
+              {m.title}
+            </Link>
+          ))}
+        </div>
+      </div>
+
       <Subtitle title="pinterest" />
       <div
         style={{
@@ -426,7 +456,7 @@ function App() {
     <div
       style={{
         fontFamily: "Iosevka Aile Iaso, Kiwi Maru, Transparent",
-        maxWidth: "500px",
+        maxWidth: "600px",
         fontSize: "18px",
       }}
     >
