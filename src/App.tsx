@@ -96,10 +96,114 @@ const music = [
   },
 ];
 
-const kewl_ppl = [
+const kewlp = [
   {
-    title: "viwiv",
-    href: "https://soundcloud.com/viwiv2020",
+    title: "wag_gaw",
+    href: "https://soundcloud.com/wag_gaw",
+  },
+  {
+    title: "stupid-picture",
+    href: "https://soundcloud.com/stupid-picture",
+  },
+  {
+    title: "tobokegao",
+    href: "https://soundcloud.com/tobokegao",
+  },
+  {
+    title: "hakushi-hasegawa",
+    href: "https://soundcloud.com/hakushi-hasegawa",
+  },
+  {
+    title: "ulla",
+    href: "https://soundcloud.com/ullastraus",
+  },
+  {
+    title: "hkolb",
+    href: "https://soundcloud.com/hkolb",
+  },
+  {
+    title: "vanfleet",
+    href: "https://soundcloud.com/vanfleet",
+  },
+  {
+    title: "lazydoll",
+    href: "https://soundcloud.com/lazydoll",
+  },
+  {
+    title: "1_mm",
+    href: "https://soundcloud.com/1_mm",
+  },
+  {
+    title: "viznode",
+    href: "https://soundcloud.com/viznode",
+  },
+  {
+    title: "voboku",
+    href: "https://soundcloud.com/voboku",
+  },
+  {
+    title: "unitkai",
+    href: "https://soundcloud.com/unitkai",
+  },
+  {
+    title: "mononomonooto",
+    href: "https://soundcloud.com/mononomonooto",
+  },
+  {
+    title: "0-nobody",
+    href: "https://soundcloud.com/0-nobody",
+  },
+  {
+    title: "syzymusic",
+    href: "https://soundcloud.com/syzymusic",
+  },
+  {
+    title: "indigoindigo000",
+    href: "https://soundcloud.com/indigoindigo000",
+  },
+  {
+    title: "acounta",
+    href: "https://soundcloud.com/acounta",
+  },
+  {
+    title: "ariaveil",
+    href: "https://soundcloud.com/ariaveil",
+  },
+  {
+    title: "themetaroom",
+    href: "https://soundcloud.com/themetaroom",
+  },
+  {
+    title: "yanagamiyuki",
+    href: "https://soundcloud.com/yanagamiyuki",
+  },
+  {
+    title: "glacci",
+    href: "https://soundcloud.com/glacci",
+  },
+  {
+    title: "sv1",
+    href: "https://soundcloud.com/sv1",
+  },
+  {
+    title: "aruku_a_dark",
+    href: "https://soundcloud.com/aruku_a_dark",
+  },
+  {
+    title: "loli_tummy",
+    href: "https://soundcloud.com/loli_tummy",
+  },
+  {
+    title: "shibeat",
+    href: "https://soundcloud.com/shibeat",
+  },
+  {
+    title: "factal",
+    href: "https://soundcloud.com/factal",
+  },
+  {
+    title: "punyumunyu",
+    href: "https://soundcloud.com/punyumunyu",
   },
 ];
 
@@ -382,14 +486,13 @@ function Description() {
             marginBottom: "4px",
           }}
         >
-          {kewl_ppl.map((m, i: number) => (
+          {kewlp.map((m, i: number) => (
             <Link href={m.href} onPlay={onPlay} key={i}>
               {m.title}
             </Link>
           ))}
         </div>
       </div>
-
       <Subtitle title="pinterest" />
       <div
         style={{
