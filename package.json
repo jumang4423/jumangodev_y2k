@@ -20,7 +20,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-spinners": "^0.14.1",
-    "use-sound": "^4.0.1"
+    "use-sound": "^4.0.1",
+    "wanakana": "^5.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

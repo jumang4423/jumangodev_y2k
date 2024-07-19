@@ -1,3 +1,4 @@
+import AnimalesePlayer from "./AnimalesePlayer";
 import { useState } from "react";
 import { CohereClient } from "cohere-ai";
 import {
@@ -61,6 +62,7 @@ const AIChat = () => {
   const [userInput, setUserInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [msgArr, setMsgArr] = useState(initMsg);
+  const [latestAIResponse, setLatestAIResponse] = useState("");
   const [composing, setComposition] = useState(false);
   const startComposition = () => setComposition(true);
   const endComposition = () => setComposition(false);
@@ -100,6 +102,7 @@ const AIChat = () => {
     for await (const chat of stream) {
       if (chat.eventType === "text-generation") {
         msgPtr[msgPtr.length - 1].message += chat.text;
+        setLatestAIResponse(chat.text);
         setMsgArr(structuredClone(msgPtr));
       }
     }
@@ -115,6 +118,7 @@ const AIChat = () => {
         marginBottom: "-4px",
       }}
     >
+      <AnimalesePlayer text={latestAIResponse} lettersFile="/animalese.wav" />
       <Box>
         <InputGroup>
           <InputRightElement

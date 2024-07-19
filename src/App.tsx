@@ -238,8 +238,7 @@ function Header() {
       <div
         className="header-smartphone-container"
         style={{
-          marginTop: "8px",
-          marginLeft: "-32px",
+          marginTop: "16px",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
@@ -249,7 +248,7 @@ function Header() {
           src="/juma.png"
           style={{
             objectFit: "cover",
-            width: "112%",
+            width: "100%",
           }}
         />
       </div>
