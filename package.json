@@ -10,9 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.12.0",
+    "@emotion/styled": "^11.12.0",
+    "cohere-ai": "^7.11.0",
     "framer-motion": "^10.16.4",
+    "ldrs": "^1.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-spinners": "^0.14.1",
     "use-sound": "^4.0.1"
   },
   "devDependencies": {

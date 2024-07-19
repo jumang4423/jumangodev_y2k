@@ -7,6 +7,7 @@ import hov_1 from "/hov_1.mp3";
 import hov_2 from "/hov_2.mp3";
 import hov_3 from "/hov_3.mp3";
 const captcha = "/captcha.mp4";
+import AIChat from "./AIChat";
 const soft = [
   "treed-gpt",
   "gameboy-rs",
@@ -573,6 +574,7 @@ function App() {
         rel="stylesheet"
       />
       <Header />
+      <AIChat />
       <Description />
     </div>
   );
