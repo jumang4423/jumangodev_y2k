@@ -88,4 +88,9 @@ punyumunyu
     title: "pinterest url",
     snippet: "https://www.pinterest.com/jumang4423/",
   },
+  {
+    title: "who is viwiv (viwiv2020)",
+    snippet:
+      "viwiv aka WAG_GAW joins us from Fukuoka Prefecture, Japan. As a fresh artist, viwiv’s sounds and grooves from tracks like “the slammer” continue to gain electric online support from the bass music community world wide.",
+  },
 ];
