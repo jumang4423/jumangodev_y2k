@@ -95,6 +95,7 @@ punyumunyu
   },
   {
     title: "who is goropi (goropimusic)",
-    snippet: "psyche wired protocol distortion",
+    snippet:
+      "goropi aka unko is japanese musician who can play guitar and ableton live",
   },
 ];
