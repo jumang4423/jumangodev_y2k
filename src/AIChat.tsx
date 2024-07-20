@@ -93,14 +93,17 @@ const AIChat = () => {
       role: "User",
       message: userInputCP,
     });
-    msgPtr.push({
-      role: "Chatbot",
-      message: "",
-    });
     setMsgArr(structuredClone(msgPtr));
 
     for await (const chat of stream) {
       if (chat.eventType === "text-generation") {
+        if (msgPtr[msgPtr.length - 1].role !== "Chatbot") {
+          msgPtr.push({
+            role: "Chatbot",
+            message: "",
+          });
+        }
+
         msgPtr[msgPtr.length - 1].message += chat.text;
         setLatestAIResponse(chat.text);
         setMsgArr(structuredClone(msgPtr));
