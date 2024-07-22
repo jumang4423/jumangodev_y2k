@@ -8,6 +8,7 @@ import hov_2 from "/hov_2.mp3";
 import hov_3 from "/hov_3.mp3";
 const captcha = "/captcha.mp4";
 import AIChat from "./AIChat";
+import { AbsoluteCenter, Box, Divider } from "@chakra-ui/react";
 const soft = [
   "treed-gpt",
   "gameboy-rs",
@@ -275,11 +276,13 @@ function Link({
       target="_blank"
       rel="noreferrer"
       style={{
-        marginLeft: "8px",
-        backgroundColor: pink,
-        color: "white",
+        marginLeft: "6px",
+        color: "black",
+        borderRadius: "100%",
+        border: "1px solid lightgray",
         textDecoration: "underline",
         fontWeight: "normal",
+        padding: "0 0px",
         filter: `opacity(${disabled ? 0.3 : 1.0})`,
       }}
       onClick={() => {
@@ -295,16 +298,9 @@ function Subtitle({ title }: { title: string }) {
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "center",
-        fontSize: "28px",
-        fontFamily: "Dissolved Exchange Regular",
-        color: pink,
-        marginBottom: "-8px",
+        marginTop: "8px",
       }}
-    >
-      <div style={{ display: "inline-block", marginLeft: "0px" }}>{title}</div>
-    </div>
+    ></div>
   );
 }
 
@@ -380,51 +376,66 @@ function Description() {
       <Subtitle title="about" />
       <div
         style={{
-          marginBottom: "-10px",
+          border: "1px solid lightgray",
+          borderRadius: "100%",
+          display: "flex",
         }}
       >
-        i make music and visuals from japan{" "}
-      </div>
-      <div>
-        <SoundCloudLinkCard
-          href="https://etherscan.io/address/0x4bd46fe39b1630915687b4edd3de582c85c20bf9"
-          title="0x4bd46fe3....85c20bf9"
-          imgSrc="/ether.svg"
-          onPlay={onPlay}
-        />
-      </div>
-      <Subtitle title="sns" />
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div>jumango's work is most audible via:</div>
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: "8px 0px",
+            marginBottom: "-10px",
           }}
         >
-          <Link href="https://soundcloud.com/jumang4423/" onPlay={onPlay}>
-            soundcloud
-          </Link>
-          <Link onPlay={onPlay} href="https://scrapbox.io/jumang4423/">
-            scrapbox
-          </Link>
-          <Link onPlay={onPlay} href="https://github.com/jumang4423/">
-            github
-          </Link>
-          <Link onPlay={onPlay} href="https://twitter.com/jumang4423/">
-            x(twitter)
-          </Link>
+          i make music and code from japan:
+        </div>
+        <div>
           <Link
+            href="https://etherscan.io/address/0x4bd46fe39b1630915687b4edd3de582c85c20bf9"
             onPlay={onPlay}
-            href="https://vrchat.com/home/user/usr_4b57f0ea-9bb7-4a9a-9f6c-42b3734c9ee3/"
           >
-            vrchat
+            0x4bd46fe3....85c20bf9
           </Link>
-          <Link onPlay={onPlay} href="https://jumango.bandcamp.com/">
-            bandcamp
-          </Link>
+        </div>
+      </div>
+      <Subtitle title="sns" />
+      <div
+        style={{
+          border: "1px solid lightgray",
+          borderRadius: "100%",
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div>jumango's work is most audible via:</div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: "8px 0px",
+            }}
+          >
+            <Link href="https://soundcloud.com/jumang4423/" onPlay={onPlay}>
+              soundcloud
+            </Link>
+            <Link onPlay={onPlay} href="https://scrapbox.io/jumang4423/">
+              scrapbox
+            </Link>
+            <Link onPlay={onPlay} href="https://github.com/jumang4423/">
+              github
+            </Link>
+            <Link onPlay={onPlay} href="https://twitter.com/jumang4423/">
+              x(twitter)
+            </Link>
+            <Link
+              onPlay={onPlay}
+              href="https://vrchat.com/home/user/usr_4b57f0ea-9bb7-4a9a-9f6c-42b3734c9ee3/"
+            >
+              vrchat
+            </Link>
+            <Link onPlay={onPlay} href="https://jumango.bandcamp.com/">
+              bandcamp
+            </Link>
+          </div>
         </div>
       </div>
       <div style={{ marginTop: "4px" }}>
@@ -434,6 +445,8 @@ function Description() {
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
+            border: "1px solid lightgray",
+            borderRadius: "100%",
             alignItems: "center",
             gap: "0px 4px",
             marginTop: "-4px",
@@ -455,6 +468,8 @@ function Description() {
           style={{
             display: "flex",
             flexDirection: "row",
+            border: "1px solid lightgray",
+            borderRadius: "100%",
             flexWrap: "wrap",
             alignItems: "center",
             gap: "8px 0px",
@@ -477,6 +492,8 @@ function Description() {
         <Subtitle title="cool people" />
         <div
           style={{
+            border: "1px solid lightgray",
+            borderRadius: "100%",
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
@@ -533,6 +550,9 @@ function Description() {
             marginTop: "8px",
             display: "flex",
             flexDirection: "column",
+
+            borderRadius: "100%",
+            border: "1px solid lightgray",
           }}
         >
           「Harbot」は、アクセスカウンターやゲストブック、リンク集といった個人ホームページでよく使われる機能を、可愛いキャラクターとともに支援するサービスだ。
@@ -560,7 +580,7 @@ function App() {
       style={{
         fontFamily: "Iosevka Aile Iaso, Kiwi Maru, Transparent",
         maxWidth: "600px",
-        fontSize: "18px",
+        fontSize: "17px",
       }}
     >
       <link
@@ -574,6 +594,12 @@ function App() {
       />
       <Header />
       <AIChat />
+      <Box position="relative" padding="4">
+        <Divider />
+        <AbsoluteCenter bg="white" px="4">
+          jumango db
+        </AbsoluteCenter>
+      </Box>
       <Description />
     </div>
   );

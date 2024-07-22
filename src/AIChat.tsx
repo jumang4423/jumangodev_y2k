@@ -17,7 +17,6 @@ const cohere_keys = [
   "qwsL9bEqlz7s0P1VqL2cx0FemwnThg69lrrCUPIa",
   "H17WDkPcbTlroZGL05H3euhzz3D44MhpJhHt2LH7",
   "44YNhPFqIKNh6ovz6RkK9bq2fMk97uzBy78flevM",
-  "IopoRk2XzN7kracvdrWd3pBU2mnRf8ilC3u3ExH1",
   "GPcCjoFbEXhjRO7n7w2Hu5cM67W5TOcTLQo8enIC",
 ];
 const get_cohere = () => {
@@ -43,11 +42,11 @@ const UserMessage: React.FC<{ message: Message; isUser: boolean }> = ({
   const name = isUser ? "you" : "jumango";
   return (
     <Box
-      bg={isUser ? "gray.300" : "brand.200"}
-      color={"white"}
+      color={"black"}
       p={1}
-      mb={1}
-      borderRadius="2xl"
+      mt={1}
+      borderRadius="100%"
+      border="1px solid lightgray"
       display="inline-block"
       maxW="100%"
       ml="auto"
@@ -153,11 +152,11 @@ const AIChat = () => {
             )}
           </InputRightElement>
           <Textarea
-            focusBorderColor="brand.500"
+            focusBorderColor="gray.200"
             height={"auto"}
             onCompositionStart={startComposition}
             onCompositionEnd={endComposition}
-            placeholder="jumango ai..."
+            placeholder="ask to jumango ai..."
             rows={Math.min(3, userInput.split("\n").length)}
             h={"auto"}
             value={userInput}
