@@ -98,4 +98,9 @@ punyumunyu
     snippet:
       "goropi aka unko is japanese musician who can play guitar and ableton live",
   },
+  {
+    title: "who is mu0iot?",
+    snippet:
+      "mu0iot aka ☆૮꒰•༝ •。꒱ა is very cute artist that jumango really respect<3. check https://www.instagram.com/mu0iot/",
+  },
 ];
