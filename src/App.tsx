@@ -320,7 +320,7 @@ function SoundCloudLinkCard({
       style={{
         display: "flex",
         alignItems: "center",
-        marginTop: "8px",
+        marginTop: "4px",
       }}
     >
       <img src={imgSrc} width={32} height={32} />
@@ -386,9 +386,7 @@ function Description() {
             marginBottom: "-10px",
           }}
         >
-          i make music and code from japan:
-        </div>
-        <div>
+          making music and code:
           <Link
             href="https://etherscan.io/address/0x4bd46fe39b1630915687b4edd3de582c85c20bf9"
             onPlay={onPlay}
@@ -411,7 +409,7 @@ function Description() {
               display: "flex",
               flexDirection: "row",
               flexWrap: "wrap",
-              gap: "8px 0px",
+              gap: "4px 0px",
             }}
           >
             <Link href="https://soundcloud.com/jumang4423/" onPlay={onPlay}>
@@ -472,7 +470,7 @@ function Description() {
             borderRadius: "100%",
             flexWrap: "wrap",
             alignItems: "center",
-            gap: "8px 0px",
+            gap: "4px 0px",
             marginTop: "4px",
             marginBottom: "-4px",
           }}
@@ -498,7 +496,7 @@ function Description() {
             flexDirection: "row",
             flexWrap: "wrap",
             alignItems: "center",
-            gap: "8px 0px",
+            gap: "4px 0px",
             marginTop: "4px",
             marginBottom: "4px",
           }}

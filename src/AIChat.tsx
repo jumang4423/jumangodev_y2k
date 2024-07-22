@@ -44,7 +44,7 @@ const UserMessage: React.FC<{ message: Message; isUser: boolean }> = ({
     <Box
       color={"black"}
       p={1}
-      mt={1}
+      mt={0.5}
       borderRadius="100%"
       border="1px solid lightgray"
       display="inline-block"
