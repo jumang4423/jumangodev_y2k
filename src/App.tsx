@@ -32,7 +32,7 @@ const soft = [
   "hack-the-music",
 ];
 
-const pink = "rgb(255, 184, 244)";
+const pink = "rgb(255, 174, 244)";
 
 const music = [
   {

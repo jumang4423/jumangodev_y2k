@@ -12,10 +12,22 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { quantum } from "ldrs";
 import { documents, SYSTEM_PROMPT } from "./system";
 quantum.register();
-const cohere_key = "KryHRXgAb4WY0XeyK5VWFP8d1iQlxX3ssgnzvEDR";
-const cohere = new CohereClient({
-  token: cohere_key,
-});
+const cohere_keys = [
+  "KryHRXgAb4WY0XeyK5VWFP8d1iQlxX3ssgnzvEDR",
+  "qwsL9bEqlz7s0P1VqL2cx0FemwnThg69lrrCUPIa",
+  "H17WDkPcbTlroZGL05H3euhzz3D44MhpJhHt2LH7",
+  "44YNhPFqIKNh6ovz6RkK9bq2fMk97uzBy78flevM",
+  "IopoRk2XzN7kracvdrWd3pBU2mnRf8ilC3u3ExH1",
+  "GPcCjoFbEXhjRO7n7w2Hu5cM67W5TOcTLQo8enIC",
+];
+const get_cohere = () => {
+  const cohere_key =
+    cohere_keys[Math.floor(Math.random() * cohere_keys.length)];
+  const cohere = new CohereClient({
+    token: cohere_key,
+  });
+  return cohere;
+};
 
 interface Message {
   role: string;
@@ -37,7 +49,7 @@ const UserMessage: React.FC<{ message: Message; isUser: boolean }> = ({
       mb={1}
       borderRadius="2xl"
       display="inline-block"
-      maxW="80%"
+      maxW="100%"
       ml="auto"
       lineHeight={0.9}
       flexDirection={"column"}
@@ -83,31 +95,36 @@ const AIChat = () => {
       },
       ...msgPtr,
     ];
-    const stream = await cohere.chatStream({
-      model: "command-r-plus",
-      message: userInputCP,
-      chatHistory: w_system,
-      documents: documents,
-    });
-    msgPtr.push({
-      role: "User",
-      message: userInputCP,
-    });
-    setMsgArr(structuredClone(msgPtr));
+    try {
+      const cohere = get_cohere();
+      const stream = await cohere.chatStream({
+        model: "command-r-plus",
+        message: userInputCP,
+        chatHistory: w_system,
+        documents: documents,
+      });
+      msgPtr.push({
+        role: "User",
+        message: userInputCP,
+      });
+      setMsgArr(structuredClone(msgPtr));
 
-    for await (const chat of stream) {
-      if (chat.eventType === "text-generation") {
-        if (msgPtr[msgPtr.length - 1].role !== "Chatbot") {
-          msgPtr.push({
-            role: "Chatbot",
-            message: "",
-          });
+      for await (const chat of stream) {
+        if (chat.eventType === "text-generation") {
+          if (msgPtr[msgPtr.length - 1].role !== "Chatbot") {
+            msgPtr.push({
+              role: "Chatbot",
+              message: "",
+            });
+          }
+
+          msgPtr[msgPtr.length - 1].message += chat.text;
+          setLatestAIResponse(chat.text);
+          setMsgArr(structuredClone(msgPtr));
         }
-
-        msgPtr[msgPtr.length - 1].message += chat.text;
-        setLatestAIResponse(chat.text);
-        setMsgArr(structuredClone(msgPtr));
       }
+    } catch {
+      alert("jumango ai unavailable ;<");
     }
     setIsSubmitting(false);
   };
