@@ -42,7 +42,7 @@ const UserMessage: React.FC<{ message: Message; isUser: boolean }> = ({
   const name = isUser ? "you" : "jumango";
   return (
     <Box
-      color={"black"}
+      color={"gray"}
       p={1}
       mt={0.5}
       borderRadius="100%"

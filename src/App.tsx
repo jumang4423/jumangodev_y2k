@@ -277,7 +277,7 @@ function Link({
       rel="noreferrer"
       style={{
         marginLeft: "6px",
-        color: "black",
+        color: "gray",
         borderRadius: "100%",
         border: "1px solid lightgray",
         textDecoration: "underline",
@@ -373,28 +373,31 @@ function Description() {
         marginRight: "16px",
       }}
     >
-      <Subtitle title="about" />
-      <div
-        style={{
-          border: "1px solid lightgray",
-          borderRadius: "100%",
-          display: "flex",
-        }}
-      >
+      <div style={{ marginTop: "4px" }}>
+        <Subtitle title="music" />
         <div
           style={{
-            marginBottom: "-10px",
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            border: "1px solid lightgray",
+            borderRadius: "100%",
+            alignItems: "center",
+            gap: "0px 4px",
+            marginTop: "-4px",
           }}
         >
-          making music and code:
-          <Link
-            href="https://etherscan.io/address/0x4bd46fe39b1630915687b4edd3de582c85c20bf9"
-            onPlay={onPlay}
-          >
-            0x4bd46fe3....85c20bf9
-          </Link>
+          {music.map((m) => (
+            <SoundCloudLinkCard
+              href={m.href}
+              title={m.title}
+              onPlay={onPlay}
+              imgSrc={m.imgSrc}
+            />
+          ))}
         </div>
       </div>
+
       <Subtitle title="sns" />
       <div
         style={{
@@ -403,7 +406,6 @@ function Description() {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div>jumango's work is most audible via:</div>
           <div
             style={{
               display: "flex",
@@ -434,30 +436,6 @@ function Description() {
               bandcamp
             </Link>
           </div>
-        </div>
-      </div>
-      <div style={{ marginTop: "4px" }}>
-        <Subtitle title="music" />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            border: "1px solid lightgray",
-            borderRadius: "100%",
-            alignItems: "center",
-            gap: "0px 4px",
-            marginTop: "-4px",
-          }}
-        >
-          {music.map((m) => (
-            <SoundCloudLinkCard
-              href={m.href}
-              title={m.title}
-              onPlay={onPlay}
-              imgSrc={m.imgSrc}
-            />
-          ))}
         </div>
       </div>
       <div style={{ marginTop: "4px" }}>
@@ -549,6 +527,7 @@ function Description() {
             display: "flex",
             flexDirection: "column",
 
+            color: "gray",
             borderRadius: "100%",
             border: "1px solid lightgray",
           }}
@@ -595,7 +574,7 @@ function App() {
       <Box position="relative" padding="4">
         <Divider />
         <AbsoluteCenter bg="white" px="4">
-          jumango db
+          <div style={{ color: "gray" }}>*｡ ☆ ⭐︎ ｡*</div>
         </AbsoluteCenter>
       </Box>
       <Description />
