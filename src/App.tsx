@@ -280,7 +280,7 @@ function Link({
         color: "gray",
         borderRadius: "100%",
         border: "1px solid lightgray",
-        textDecoration: "underline",
+        textDecoration: "none",
         fontWeight: "normal",
         padding: "0 0px",
         filter: `opacity(${disabled ? 0.3 : 1.0})`,
@@ -323,7 +323,12 @@ function SoundCloudLinkCard({
         marginTop: "4px",
       }}
     >
-      <img src={imgSrc} width={32} height={32} />
+      <img
+        src={imgSrc}
+        width={32}
+        height={32}
+        style={{ borderRadius: "100%" }}
+      />
       <Link href={href} onPlay={onPlay}>
         {title}
       </Link>
@@ -384,7 +389,6 @@ function Description() {
             borderRadius: "100%",
             alignItems: "center",
             gap: "0px 4px",
-            marginTop: "-4px",
           }}
         >
           {music.map((m) => (
@@ -411,7 +415,7 @@ function Description() {
               display: "flex",
               flexDirection: "row",
               flexWrap: "wrap",
-              gap: "4px 0px",
+              gap: "0px 0px",
             }}
           >
             <Link href="https://soundcloud.com/jumang4423/" onPlay={onPlay}>
@@ -448,9 +452,7 @@ function Description() {
             borderRadius: "100%",
             flexWrap: "wrap",
             alignItems: "center",
-            gap: "4px 0px",
-            marginTop: "4px",
-            marginBottom: "-4px",
+            gap: "0px 0px",
           }}
         >
           {soft.map((m: string, i: number) => (
@@ -474,7 +476,7 @@ function Description() {
             flexDirection: "row",
             flexWrap: "wrap",
             alignItems: "center",
-            gap: "4px 0px",
+            gap: "0px 0px",
             marginTop: "4px",
             marginBottom: "4px",
           }}
