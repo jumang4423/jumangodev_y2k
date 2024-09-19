@@ -116,6 +116,10 @@ const kewlp = [
     href: "https://soundcloud.com/hakushi-hasegawa",
   },
   {
+    title: "heoliene",
+    href: "https://soundcloud.com/heoliene",
+  },
+  {
     title: "ulla",
     href: "https://soundcloud.com/ullastraus",
   },
@@ -442,7 +446,7 @@ function Description() {
           </div>
         </div>
       </div>
-      <div style={{ marginTop: "4px" }}>
+      <div style={{ marginTop: "8px" }}>
         <Subtitle title="software" />
         <div
           style={{
@@ -466,7 +470,7 @@ function Description() {
           ))}
         </div>
       </div>
-      <div style={{ marginTop: "4px" }}>
+      <div style={{ marginTop: "8px" }}>
         <Subtitle title="cool people" />
         <div
           style={{
@@ -491,7 +495,7 @@ function Description() {
       <Subtitle title="pinterest" />
       <div
         style={{
-          marginTop: "8px",
+          marginTop: "16px",
         }}
       >
         <a
@@ -576,7 +580,7 @@ function App() {
       <Box position="relative" padding="4">
         <Divider />
         <AbsoluteCenter bg="white" px="4">
-          <div style={{ color: "gray" }}>*｡ ☆ ⭐︎ ｡*</div>
+          <div style={{ color: "gray" }}>*｡ ☆ ☆ ｡*</div>
         </AbsoluteCenter>
       </Box>
       <Description />

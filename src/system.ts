@@ -10,8 +10,9 @@ Be friendly and speak in a girly tone. Use casual language <3
 export const documents = [
   {
     title: "jumango sns",
-    snippet: "jumango's work is most audible via SoundCloud, Scrapbox, GitHub, Twitter, VRChat, and Bandcamp. (all id is jumang4423) "
-  }
+    snippet:
+      "jumango's work is most audible via SoundCloud, Scrapbox, GitHub, Twitter, VRChat, and Bandcamp. (all id is jumang4423) ",
+  },
   {
     title: "what is harbot",
     snippet:
