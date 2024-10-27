@@ -9,6 +9,7 @@ import hov_3 from "/hov_3.mp3";
 const captcha = "/captcha.mp4";
 import AIChat from "./AIChat";
 import { AbsoluteCenter, Box, Divider } from "@chakra-ui/react";
+import { createClient } from "microcms-js-sdk";
 const soft = [
   "treed-gpt",
   "gameboy-rs",
@@ -33,7 +34,11 @@ const soft = [
   "hack-the-music",
 ];
 
-const pink = "rgb(255, 174, 244)";
+const MCMCSClient = createClient({
+  serviceDomain: "jumang4423",
+  apiKey: "NrXtEm2HTvhho5hgmmmqCUmZwgEpGvqGp2x3",
+  retry: true,
+});
 
 const music = [
   {
@@ -274,8 +279,6 @@ function Link({
 }) {
   return (
     <motion.a
-      initial={{ scale: 1.0 }}
-      whileHover={{ scale: disabled ? 1.0 : 1.25 }}
       href={disabled ? "#" : href}
       target="_blank"
       rel="noreferrer"
@@ -284,7 +287,6 @@ function Link({
         color: "gray",
         borderRadius: "100%",
         border: "1px solid lightgray",
-        textDecoration: "none",
         fontWeight: "normal",
         padding: "0 0px",
         filter: `opacity(${disabled ? 0.3 : 1.0})`,
@@ -336,6 +338,40 @@ function SoundCloudLinkCard({
       <Link href={href} onPlay={onPlay}>
         {title}
       </Link>
+    </div>
+  );
+}
+
+function BlogSystem({ onPlay }: { onPlay: () => void }) {
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    MCMCSClient.get({ endpoint: "blog" }).then((res) => {
+      setBlogs(res.contents);
+    });
+  }, []);
+  return (
+    <div
+      style={{
+        border: "1px solid lightgray",
+        borderRadius: "100%",
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "center",
+        gap: "0px 0px",
+        marginTop: "4px",
+        marginBottom: "4px",
+        color: "gray",
+      }}
+    >
+      {blogs.map((blog) => (
+        <SoundCloudLinkCard
+          imgSrc={blog.thumbnail_img.url}
+          href={`https://jumang4423.microcms.io/blog/${blog.id}`}
+          title={blog.title}
+          onPlay={onPlay}
+        />
+      ))}
     </div>
   );
 }
@@ -492,6 +528,11 @@ function Description() {
           ))}
         </div>
       </div>
+
+      <div style={{ marginTop: "8px" }}>
+        <Subtitle title="blog" />
+        <BlogSystem onPlay={onPlay} />
+      </div>
       <Subtitle title="pinterest" />
       <div
         style={{
@@ -561,7 +602,7 @@ function App() {
   return (
     <div
       style={{
-        fontFamily: "Iosevka Aile Iaso, Kiwi Maru, Transparent",
+        fontFamily: "Iosevka Aile Iaso, Kiwi Maru,Transparent",
         maxWidth: "600px",
         fontSize: "17px",
       }}

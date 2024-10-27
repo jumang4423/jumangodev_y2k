@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import App from "./App.tsx";
 import "./index.css";
@@ -22,8 +23,19 @@ const pinkTheme = extendTheme({
   },
 });
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/blog/:id",
+    // element: <Blog />,
+  },
+]);
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ChakraProvider theme={pinkTheme}>
-    <App />
+    <RouterProvider router={router} />
   </ChakraProvider>
 );
