@@ -9,7 +9,10 @@ import hov_3 from "/hov_3.mp3";
 const captcha = "/captcha.mp4";
 import AIChat from "./AIChat";
 import { AbsoluteCenter, Box, Divider } from "@chakra-ui/react";
-import { createClient } from "microcms-js-sdk";
+import { SimplePool } from 'nostr-tools/pool'
+import { bytesToHex } from '@noble/hashes/utils'
+import { bech32 } from 'bech32';
+
 const soft = [
   "treed-gpt",
   "gameboy-rs",
@@ -34,18 +37,18 @@ const soft = [
   "hack-the-music",
 ];
 
-const MCMCSClient = createClient({
-  serviceDomain: "jumang4423",
-  apiKey: "NrXtEm2HTvhho5hgmmmqCUmZwgEpGvqGp2x3",
-  retry: true,
-});
 
 const music = [
   {
-    title: "captcha",
-    href: "https://soundcloud.com/jumang4423/captcha",
+    title: "ramcore",
+    href: "https://soundcloud.com/jumang4423/ramcore-lilbeshramko",
+    imgSrc: "https://i1.sndcdn.com/artworks-Gdfd5yrN6MenPWAa-kTghrQ-t500x500.jpg",
+  },
+  {
+    title: "frail",
+    href: "https://soundcloud.com/jumang4423/frail",
     imgSrc:
-      "https://i1.sndcdn.com/artworks-57i5LYJ8UyHmbkYl-xUy6aQ-t500x500.jpg",
+      "https://i1.sndcdn.com/artworks-dzLoHPQgjDSU2a1m-2yoiIg-t500x500.jpg",
   },
   {
     title: "tuna",
@@ -54,7 +57,13 @@ const music = [
       "https://i1.sndcdn.com/artworks-TXubNLB7Erl1yJqy-DtAWSA-t500x500.jpg",
   },
   {
-    title: "lazydoll away (remix)",
+    title: "captcha",
+    href: "https://soundcloud.com/jumang4423/captcha",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-57i5LYJ8UyHmbkYl-xUy6aQ-t500x500.jpg",
+  },
+  {
+    title: "away (remix)",
     href: "https://soundcloud.com/jumang4423/lazydoll-away-jumango-remix",
     imgSrc:
       "https://i1.sndcdn.com/artworks-1PB8WApUghwg1BUx-V0V0DA-t500x500.jpg",
@@ -64,12 +73,6 @@ const music = [
     href: "https://soundcloud.com/jumang4423/twinkle",
     imgSrc:
       "https://i1.sndcdn.com/artworks-EPu65YpZOrOimCxH-xKyKhw-t500x500.jpg",
-  },
-  {
-    title: "frail",
-    href: "https://soundcloud.com/jumang4423/frail",
-    imgSrc:
-      "https://i1.sndcdn.com/artworks-dzLoHPQgjDSU2a1m-2yoiIg-t500x500.jpg",
   },
   {
     title: "trip",
@@ -279,9 +282,11 @@ function Link({
 }) {
   return (
     <motion.a
+      initial={{ scale: 1.0 }}
+      whileHover={{ scale: disabled ? 1.0 : 1.25 }}
+      rel="noreferrer"
       href={disabled ? "#" : href}
       target="_blank"
-      rel="noreferrer"
       style={{
         marginLeft: "6px",
         color: "gray",
@@ -343,34 +348,63 @@ function SoundCloudLinkCard({
 }
 
 function BlogSystem({ onPlay }: { onPlay: () => void }) {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState<any[]>([]);
+  const decoded = bech32.decode('npub1na482zlyyhvz9nml4hvypm439dp5r4ktuxphq9aqtd0ae2hl674sy2aedf');
+  const bytes = bech32.fromWords(decoded.words);
+  const pubkey = bytesToHex(new Uint8Array(bytes));
+
   useEffect(() => {
-    MCMCSClient.get({ endpoint: "blog" }).then((res) => {
-      setBlogs(res.contents);
+    const pool = new SimplePool();
+    const relays = [
+      'wss://relay.nostr.band',
+      'wss://relay.nostr.bg',
+      'wss://relay.snort.social',
+      'wss://nos.lol'
+    ];
+    const h = pool.subscribeMany(relays, [
+      {
+        kinds: [30023],
+        authors: [pubkey]
+      }
+    ], {
+      onevent(event) {
+        console.log(event);
+        const blog = {
+          id: event.id,
+          title: event.tags.find((t: string[]) => t[0] === 'title')?.[1] || 'Untitled',
+          version: event.tags.find((t: string[]) => t[0] === 'd')?.[1] || '???',
+        };
+        setBlogs(prev => [...prev, blog]);
+      },
+      oneose() {
+        h.close();
+      },
     });
+
+    return () => {
+      h.close();
+    };
   }, []);
+
   return (
     <div
       style={{
-        border: "1px solid lightgray",
-        borderRadius: "100%",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
         alignItems: "center",
-        gap: "0px 0px",
-        marginTop: "4px",
-        marginBottom: "4px",
+        gap: "0px 8px",
         color: "gray",
       }}
     >
       {blogs.map((blog) => (
-        <SoundCloudLinkCard
-          imgSrc={blog.thumbnail_img.url}
-          href={`https://jumang4423.microcms.io/blog/${blog.id}`}
-          title={blog.title}
+        <Link
+          key={blog.id}
+          href={`/blog/${blog.id}`}
           onPlay={onPlay}
-        />
+        >
+          {blog.version}: {blog.title}
+        </Link>
       ))}
     </div>
   );
@@ -418,6 +452,25 @@ function Description() {
         marginRight: "16px",
       }}
     >
+      <div style={{
+        border: "1px solid lightgray",
+        borderRadius: "100%",
+        color: "gray",
+        display: "flex",
+        flexDirection: "column",
+        wordBreak: "break-all",
+      }}>
+        <div style={{
+          justifyContent: "center",
+          alignItems: "center",
+          display: "flex",
+          wordBreak: "break-all",
+        }}>
+          (npub1na482zlyyhvz9nml4hvypm439dp5r4ktuxphq9aqtd0ae2hl674sy2aedf)
+        </div>
+        <BlogSystem onPlay={onPlay} />
+      </div>
+
       <div style={{ marginTop: "4px" }}>
         <Subtitle title="music" />
         <div
@@ -529,10 +582,6 @@ function Description() {
         </div>
       </div>
 
-      <div style={{ marginTop: "8px" }}>
-        <Subtitle title="blog" />
-        <BlogSystem onPlay={onPlay} />
-      </div>
       <Subtitle title="pinterest" />
       <div
         style={{
@@ -605,6 +654,7 @@ function App() {
         fontFamily: "Iosevka Aile Iaso, Kiwi Maru,Transparent",
         maxWidth: "600px",
         fontSize: "17px",
+        wordBreak: "break-all",
       }}
     >
       <link
