@@ -10,6 +10,7 @@ import { AbsoluteCenter, Box, CircularProgress, Divider } from "@chakra-ui/react
 import { SimplePool } from 'nostr-tools/pool'
 import { bytesToHex } from '@noble/hashes/utils'
 import { bech32 } from 'bech32';
+import { useMediaQuery } from "@chakra-ui/react";
 
 const soft = [
   "treed-gpt",
@@ -220,49 +221,46 @@ const kewlp = [
 ];
 
 function Header() {
+  const [isMobile] = useMediaQuery("(max-width: 600px)");
+
   return (
     <motion.div
       style={{
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        alignItems: isMobile ? "flex-start" : "center",
         marginTop: "-16px",
+        justifyContent: "center",
         marginBottom: "-12px",
         flexDirection: "column",
       }}
     >
-      <video
-        src={captcha}
-        autoPlay
-        loop
-        playsInline
-        muted
-        width={500}
-        style={{
-          marginLeft: "-8px",
-          marginTop: "-16px",
-          objectFit: "cover",
-          filter: "brightness(1.01)",
-        }}
-        className="header-video-container"
-      />
-      <div
-        className="header-smartphone-container"
-        style={{
-          marginTop: "16px",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
+      {!isMobile && (
+        <video
+          src={captcha}
+          autoPlay
+          loop
+          playsInline
+          muted
+          width={500}
+          style={{
+            marginLeft: "-8px",
+            marginTop: "-16px",
+            objectFit: "cover",
+            filter: "brightness(1.01)",
+          }}
+        />
+      )}
+      {isMobile && (
         <img
           src="/juma.png"
+          alt="Juma"
           style={{
             objectFit: "cover",
+            paddingTop: "10px",
             width: "100%",
           }}
         />
-      </div>
+      )}
     </motion.div>
   );
 }
