@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { Box, Button, Spinner, Text } from "@chakra-ui/react";
+import { Box, Button, Divider, Spinner, Text } from "@chakra-ui/react";
 import { SimplePool } from "nostr-tools/pool";
 import { bytesToHex } from "@noble/hashes/utils";
 import { bech32 } from 'bech32';
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 interface BlogPost {
     id: string;
     title: string;
     content: string;
+    kind: number;
+    d: string;
+    published_at: string;
+    pubkey: string;
 }
 
 function Blog() {
@@ -48,8 +53,11 @@ function Blog() {
             ],
             {
                 onevent(event) {
-                    console.log(event);
                     const blogPost: BlogPost = {
+                        kind: event.kind,
+                        d: event.tags.find((t: string[]) => t[0] === "d")?.[1] || "",
+                        published_at: event.tags.find((t: string[]) => t[0] === "published_at")?.[1] || "",
+                        pubkey: event.pubkey,
                         id: event.id,
                         title: event.tags.find((t: string[]) => t[0] === "title")?.[1] || "Untitled",
                         content: event.content || "No content available for this blog post.",
@@ -112,14 +120,29 @@ function Blog() {
                 href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap"
                 rel="stylesheet"
             />
-            <Box p="6">
-                <Button onClick={() => navigate("/")}>Back</Button>
-                <Text fontSize="8xl" fontWeight="bold" mb="4">
+            <Box p="6" wordBreak="break-all">
+                <Box display="flex" gap="2">
+                    <Button onClick={() => navigate("/")}>Back</Button>
+                    <Button onClick={() => {
+                        window.open(`https://flycat.club/event/${blog.id}`, '_blank');
+                    }} variant="outline" rightIcon={<ExternalLinkIcon />}>
+                        <Box display="flex" justifyContent="center" alignItems="center">
+                            flycat
+                        </Box>
+                    </Button>
+                </Box>
+                <Box mt="8">
+                    <Divider />
+                </Box>
+                <Text fontSize="8xl" fontWeight="bold" mt="-4">
                     {blog.title}
+                </Text>
+                <Text fontSize="xl" color="gray" mb="4">
+                    {">"} published at {new Date(Number(blog.published_at) * 1000).toLocaleDateString()}
                 </Text>
                 <ReactMarkdown>{blog.content}</ReactMarkdown>
             </Box>
-        </div>
+        </div >
     );
 }
 

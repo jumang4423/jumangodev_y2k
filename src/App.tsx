@@ -3,12 +3,10 @@ import { useEffect, useState } from "react";
 import useSound from "use-sound";
 import "./App.css";
 import "./font.css";
-import hov_1 from "/hov_1.mp3";
 import hov_2 from "/hov_2.mp3";
-import hov_3 from "/hov_3.mp3";
 const captcha = "/captcha.mp4";
 import AIChat from "./AIChat";
-import { AbsoluteCenter, Box, Divider } from "@chakra-ui/react";
+import { AbsoluteCenter, Box, CircularProgress, Divider } from "@chakra-ui/react";
 import { SimplePool } from 'nostr-tools/pool'
 import { bytesToHex } from '@noble/hashes/utils'
 import { bech32 } from 'bech32';
@@ -397,15 +395,32 @@ function BlogSystem({ onPlay }: { onPlay: () => void }) {
         color: "gray",
       }}
     >
-      {blogs.map((blog) => (
-        <Link
-          key={blog.id}
-          href={`/blog/${blog.id}`}
-          onPlay={onPlay}
+      {blogs.length > 0 && (
+        <Box
+          opacity={1}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            gap: "0px 8px"
+          }}
         >
-          {blog.version}: {blog.title}
-        </Link>
-      ))}
+          {blogs.map((blog) => (
+            <Link
+              key={blog.id}
+              href={`/blog/${blog.id}`}
+              onPlay={onPlay}
+            >
+              {blog.version}: {blog.title}
+            </Link>
+          ))}
+        </Box>
+      )}
+      {blogs.length === 0 && (
+        <Box display="flex" justifyContent="center" alignItems="center" width="100%">
+          <CircularProgress isIndeterminate size="22px" color="gray" />
+        </Box>
+      )}
     </div>
   );
 }
@@ -413,19 +428,10 @@ function BlogSystem({ onPlay }: { onPlay: () => void }) {
 function Description() {
   const volume = 0.5;
   const [playbackRate, setPlaybackRate] = useState(1.0);
-  const [play1] = useSound(hov_1, {
-    volume,
-    playbackRate,
-  });
   const [play2] = useSound(hov_2, {
     volume,
     playbackRate,
   });
-  const [play3] = useSound(hov_3, {
-    volume,
-    playbackRate,
-  });
-  const plays = [play1, play2, play3];
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
 
   useEffect(() => {
@@ -440,9 +446,8 @@ function Description() {
   }, []);
 
   const onPlay = () => {
-    const randomPlay = plays[Math.floor(Math.random() * plays.length)];
-    randomPlay();
-    const randomRate = Math.random() * 3.0 + 0.1;
+    play2();
+    const randomRate = Math.random() * 2.0 + 0.25;
     setPlaybackRate(randomRate);
   };
   return (
@@ -621,14 +626,14 @@ function Description() {
             marginLeft: "16px",
             marginTop: "8px",
             display: "flex",
-            flexDirection: "column",
-
+            justifyContent: "center",
+            alignItems: "center",
             color: "gray",
             borderRadius: "100%",
             border: "1px solid lightgray",
           }}
         >
-          「Harbot」は、アクセスカウンターやゲストブック、リンク集といった個人ホームページでよく使われる機能を、可愛いキャラクターとともに支援するサービスだ。
+          harbot is a service that assists with features commonly used on personal websites, such as access counters, guestbooks, and link directories, all accompanied by cute characters
         </div>
       </div>
       <div style={{ marginBottom: 256 }}></div>
@@ -651,7 +656,7 @@ function App() {
   return (
     <div
       style={{
-        fontFamily: "Iosevka Aile Iaso, Kiwi Maru,Transparent",
+        fontFamily: "Iosevka Aile Iaso, Transparent",
         maxWidth: "600px",
         fontSize: "17px",
         wordBreak: "break-all",
