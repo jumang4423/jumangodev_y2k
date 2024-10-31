@@ -131,7 +131,7 @@ const AIChat = () => {
   return (
     <div
       style={{
-        marginTop: "24px",
+        marginTop: "16px",
         marginLeft: "16px",
         marginRight: "16px",
         marginBottom: "-4px",

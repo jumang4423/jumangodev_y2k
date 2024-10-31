@@ -220,11 +220,11 @@ const kewlp = [
   },
 ];
 
-function Header() {
+function Header({ onPlay }: { onPlay: () => void }) {
   const [isMobile] = useMediaQuery("(max-width: 600px)");
 
   return (
-    <motion.div
+    <div
       style={{
         display: "flex",
         alignItems: isMobile ? "flex-start" : "center",
@@ -261,7 +261,10 @@ function Header() {
           }}
         />
       )}
-    </motion.div>
+      <div style={{ alignSelf: "flex-end", color: "gray", marginRight: "12px" }}>
+        art<Link href="https://x.com/ggeyegg" onPlay={onPlay}>@eggeye</Link>
+      </div>
+    </div>
   );
 }
 
@@ -423,13 +426,7 @@ function BlogSystem({ onPlay }: { onPlay: () => void }) {
   );
 }
 
-function Description() {
-  const volume = 0.5;
-  const [playbackRate, setPlaybackRate] = useState(1.0);
-  const [play2] = useSound(hov_2, {
-    volume,
-    playbackRate,
-  });
+function Description({ onPlay }: { onPlay: () => void }) {
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
 
   useEffect(() => {
@@ -443,11 +440,7 @@ function Description() {
     document.body.appendChild(script);
   }, []);
 
-  const onPlay = () => {
-    play2();
-    const randomRate = Math.random() * 2.0 + 0.25;
-    setPlaybackRate(randomRate);
-  };
+
   return (
     <div
       style={{
@@ -648,6 +641,18 @@ const displayHackerDefenceConsole = () => {
 };
 
 function App() {
+  const volume = 0.5;
+  const [playbackRate, setPlaybackRate] = useState(1.0);
+  const [play2] = useSound(hov_2, {
+    volume,
+    playbackRate,
+  });
+  const onPlay = () => {
+    play2();
+    const randomRate = Math.random() * 2.0 + 0.25;
+    setPlaybackRate(randomRate);
+  };
+
   useEffect(() => {
     displayHackerDefenceConsole();
   }, []);
@@ -669,7 +674,7 @@ function App() {
         href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap"
         rel="stylesheet"
       />
-      <Header />
+      <Header onPlay={onPlay} />
       <AIChat />
       <Box position="relative" padding="4">
         <Divider />
@@ -677,7 +682,7 @@ function App() {
           <div style={{ color: "gray" }}>*｡ ☆ ☆ ｡*</div>
         </AbsoluteCenter>
       </Box>
-      <Description />
+      <Description onPlay={onPlay} />
     </div>
   );
 }
