@@ -6,10 +6,15 @@ import "./font.css";
 import hov_2 from "/hov_2.mp3";
 const captcha = "/captcha.mp4";
 import AIChat from "./AIChat";
-import { AbsoluteCenter, Box, CircularProgress, Divider } from "@chakra-ui/react";
-import { SimplePool } from 'nostr-tools/pool'
-import { bytesToHex } from '@noble/hashes/utils'
-import { bech32 } from 'bech32';
+import {
+  AbsoluteCenter,
+  Box,
+  CircularProgress,
+  Divider,
+} from "@chakra-ui/react";
+import { SimplePool } from "nostr-tools/pool";
+import { bytesToHex } from "@noble/hashes/utils";
+import { bech32 } from "bech32";
 import { useMediaQuery } from "@chakra-ui/react";
 
 const soft = [
@@ -36,12 +41,12 @@ const soft = [
   "hack-the-music",
 ];
 
-
 const music = [
   {
-    title: "ramcore",
-    href: "https://soundcloud.com/jumang4423/ramcore-lilbeshramko",
-    imgSrc: "https://i1.sndcdn.com/artworks-Gdfd5yrN6MenPWAa-kTghrQ-t500x500.jpg",
+    title: "safi",
+    href: "https://soundcloud.com/jumang4423/safi",
+    imgSrc:
+      "https://i1.sndcdn.com/artworks-POMNmyiRUI9fA0kJ-yuhYhw-t500x500.png",
   },
   {
     title: "frail",
@@ -261,8 +266,13 @@ function Header({ onPlay }: { onPlay: () => void }) {
           }}
         />
       )}
-      <div style={{ alignSelf: "flex-end", color: "gray", marginRight: "12px" }}>
-        art<Link href="https://x.com/ggeyegg" onPlay={onPlay}>@eggeye</Link>
+      <div
+        style={{ alignSelf: "flex-end", color: "gray", marginRight: "12px" }}
+      >
+        art
+        <Link href="https://x.com/ggeyegg" onPlay={onPlay}>
+          @eggeye
+        </Link>
       </div>
     </div>
   );
@@ -348,37 +358,46 @@ function SoundCloudLinkCard({
 
 function BlogSystem({ onPlay }: { onPlay: () => void }) {
   const [blogs, setBlogs] = useState<any[]>([]);
-  const decoded = bech32.decode('npub1na482zlyyhvz9nml4hvypm439dp5r4ktuxphq9aqtd0ae2hl674sy2aedf');
+  const decoded = bech32.decode(
+    "npub1na482zlyyhvz9nml4hvypm439dp5r4ktuxphq9aqtd0ae2hl674sy2aedf"
+  );
   const bytes = bech32.fromWords(decoded.words);
   const pubkey = bytesToHex(new Uint8Array(bytes));
 
   useEffect(() => {
     const pool = new SimplePool();
     const relays = [
-      'wss://relay.nostr.band',
-      'wss://relay.nostr.bg',
-      'wss://relay.snort.social',
-      'wss://nos.lol'
+      "wss://relay.nostr.band",
+      "wss://relay.nostr.bg",
+      "wss://relay.snort.social",
+      "wss://nos.lol",
     ];
-    const h = pool.subscribeMany(relays, [
+    const h = pool.subscribeMany(
+      relays,
+      [
+        {
+          kinds: [30023],
+          authors: [pubkey],
+        },
+      ],
       {
-        kinds: [30023],
-        authors: [pubkey]
+        onevent(event) {
+          console.log(event);
+          const blog = {
+            id: event.id,
+            title:
+              event.tags.find((t: string[]) => t[0] === "title")?.[1] ||
+              "Untitled",
+            version:
+              event.tags.find((t: string[]) => t[0] === "d")?.[1] || "???",
+          };
+          setBlogs((prev) => [...prev, blog]);
+        },
+        oneose() {
+          h.close();
+        },
       }
-    ], {
-      onevent(event) {
-        console.log(event);
-        const blog = {
-          id: event.id,
-          title: event.tags.find((t: string[]) => t[0] === 'title')?.[1] || 'Untitled',
-          version: event.tags.find((t: string[]) => t[0] === 'd')?.[1] || '???',
-        };
-        setBlogs(prev => [...prev, blog]);
-      },
-      oneose() {
-        h.close();
-      },
-    });
+    );
 
     return () => {
       h.close();
@@ -403,22 +422,23 @@ function BlogSystem({ onPlay }: { onPlay: () => void }) {
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
-            gap: "0px 8px"
+            gap: "0px 8px",
           }}
         >
           {blogs.map((blog) => (
-            <Link
-              key={blog.id}
-              href={`/blog/${blog.id}`}
-              onPlay={onPlay}
-            >
+            <Link key={blog.id} href={`/blog/${blog.id}`} onPlay={onPlay}>
               {blog.version}: {blog.title}
             </Link>
           ))}
         </Box>
       )}
       {blogs.length === 0 && (
-        <Box display="flex" justifyContent="center" alignItems="center" width="100%">
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+        >
           <CircularProgress isIndeterminate size="22px" color="gray" />
         </Box>
       )}
@@ -440,7 +460,6 @@ function Description({ onPlay }: { onPlay: () => void }) {
     document.body.appendChild(script);
   }, []);
 
-
   return (
     <div
       style={{
@@ -448,25 +467,6 @@ function Description({ onPlay }: { onPlay: () => void }) {
         marginRight: "16px",
       }}
     >
-      <div style={{
-        border: "1px solid lightgray",
-        borderRadius: "100%",
-        color: "gray",
-        display: "flex",
-        flexDirection: "column",
-        wordBreak: "break-all",
-      }}>
-        <div style={{
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex",
-          wordBreak: "break-all",
-        }}>
-          (npub1na482zlyyhvz9nml4hvypm439dp5r4ktuxphq9aqtd0ae2hl674sy2aedf)
-        </div>
-        <BlogSystem onPlay={onPlay} />
-      </div>
-
       <div style={{ marginTop: "4px" }}>
         <Subtitle title="music" />
         <div
@@ -488,6 +488,29 @@ function Description({ onPlay }: { onPlay: () => void }) {
               imgSrc={m.imgSrc}
             />
           ))}
+        </div>
+        <div
+          style={{
+            marginTop: "8px",
+            border: "1px solid lightgray",
+            borderRadius: "100%",
+            color: "gray",
+            display: "flex",
+            flexDirection: "column",
+            wordBreak: "break-all",
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              wordBreak: "break-all",
+            }}
+          >
+            (npub1na482zlyyhvz9nml4hvypm439dp5r4ktuxphq9aqtd0ae2hl674sy2aedf)
+          </div>
+          <BlogSystem onPlay={onPlay} />
         </div>
       </div>
 
@@ -624,7 +647,9 @@ function Description({ onPlay }: { onPlay: () => void }) {
             border: "1px solid lightgray",
           }}
         >
-          harbot is a service that assists with features commonly used on personal websites, such as access counters, guestbooks, and link directories, all accompanied by cute characters
+          harbot is a service that assists with features commonly used on
+          personal websites, such as access counters, guestbooks, and link
+          directories, all accompanied by cute characters
         </div>
       </div>
       <div style={{ marginBottom: 256 }}></div>
