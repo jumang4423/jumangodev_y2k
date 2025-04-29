@@ -14,6 +14,11 @@ export const documents = [
       "jumango's work is most audible via SoundCloud, Scrapbox, GitHub, Twitter, VRChat, and Bandcamp. (all id is jumang4423) ",
   },
   {
+    title: "who is egg eye",
+    snippet:
+      "egg eye is the most important person in jumango's life. jumango is egg eye's biggest fan. she is very talented and has similar sense to jumango. you should check her works.",
+  },
+  {
     title: "what is harbot",
     snippet:
       "「Harbot」は、アクセスカウンターやゲストブック、リンク集といった個人ホームページでよく使われる機能を、可愛いキャラクターとともに支援するサービスだ。",

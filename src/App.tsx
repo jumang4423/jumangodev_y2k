@@ -6,16 +6,9 @@ import "./font.css";
 import hov_2 from "/hov_2.mp3";
 const captcha = "/captcha.mp4";
 import AIChat from "./AIChat";
-import {
-  AbsoluteCenter,
-  Box,
-  CircularProgress,
-  Divider,
-} from "@chakra-ui/react";
-import { SimplePool } from "nostr-tools/pool";
-import { bytesToHex } from "@noble/hashes/utils";
-import { bech32 } from "bech32";
+import { AbsoluteCenter, Box, Divider } from "@chakra-ui/react";
 import { useMediaQuery } from "@chakra-ui/react";
+import RecentBlogPosts from "./RecentBlogPosts";
 
 const soft = [
   "treed-gpt",
@@ -116,14 +109,6 @@ const kewlp = [
     href: "https://soundcloud.com/wag_gaw",
   },
   {
-    title: "stupid-picture",
-    href: "https://soundcloud.com/stupid-picture",
-  },
-  {
-    title: "tobokegao",
-    href: "https://soundcloud.com/tobokegao",
-  },
-  {
     title: "hakushi-hasegawa",
     href: "https://soundcloud.com/hakushi-hasegawa",
   },
@@ -136,24 +121,12 @@ const kewlp = [
     href: "https://soundcloud.com/ullastraus",
   },
   {
-    title: "hkolb",
-    href: "https://soundcloud.com/hkolb",
-  },
-  {
     title: "vanfleet",
     href: "https://soundcloud.com/vanfleet",
   },
   {
-    title: "lazydoll",
-    href: "https://soundcloud.com/lazydoll",
-  },
-  {
     title: "1_mm",
     href: "https://soundcloud.com/1_mm",
-  },
-  {
-    title: "viznode",
-    href: "https://soundcloud.com/viznode",
   },
   {
     title: "voboku",
@@ -184,20 +157,12 @@ const kewlp = [
     href: "https://soundcloud.com/acounta",
   },
   {
-    title: "ariaveil",
-    href: "https://soundcloud.com/ariaveil",
-  },
-  {
     title: "themetaroom",
     href: "https://soundcloud.com/themetaroom",
   },
   {
     title: "yanagamiyuki",
     href: "https://soundcloud.com/yanagamiyuki",
-  },
-  {
-    title: "glacci",
-    href: "https://soundcloud.com/glacci",
   },
   {
     title: "sv1",
@@ -208,10 +173,6 @@ const kewlp = [
     href: "https://soundcloud.com/aruku_a_dark",
   },
   {
-    title: "loli_tummy",
-    href: "https://soundcloud.com/loli_tummy",
-  },
-  {
     title: "shibeat",
     href: "https://soundcloud.com/shibeat",
   },
@@ -220,8 +181,8 @@ const kewlp = [
     href: "https://soundcloud.com/factal",
   },
   {
-    title: "punyumunyu",
-    href: "https://soundcloud.com/punyumunyu",
+    title: "tau contrib",
+    href: "https://soundcloud.com/taucontrib",
   },
 ];
 
@@ -246,7 +207,7 @@ function Header({ onPlay }: { onPlay: () => void }) {
           loop
           playsInline
           muted
-          width={500}
+          width={550}
           style={{
             marginLeft: "-8px",
             marginTop: "-16px",
@@ -283,11 +244,13 @@ function Link({
   href,
   onPlay,
   disabled = false,
+  style = {},
 }: {
   children: any;
   href: string;
   onPlay: () => void;
   disabled?: boolean;
+  style?: React.CSSProperties;
 }) {
   return (
     <motion.a
@@ -304,6 +267,7 @@ function Link({
         fontWeight: "normal",
         padding: "0 0px",
         filter: `opacity(${disabled ? 0.3 : 1.0})`,
+        ...style,
       }}
       onClick={() => {
         onPlay();
@@ -319,8 +283,15 @@ function Subtitle({ title }: { title: string }) {
     <div
       style={{
         marginTop: "8px",
+        width: "150px",
+        color: "#d0f0d8",
+        fontSize: "24px",
+        transform: "scaleX(2.2) translateX(40px)",
+        textAlign: "left",
       }}
-    ></div>
+    >
+      ({title})
+    </div>
   );
 }
 
@@ -356,96 +327,6 @@ function SoundCloudLinkCard({
   );
 }
 
-function BlogSystem({ onPlay }: { onPlay: () => void }) {
-  const [blogs, setBlogs] = useState<any[]>([]);
-  const decoded = bech32.decode(
-    "npub1na482zlyyhvz9nml4hvypm439dp5r4ktuxphq9aqtd0ae2hl674sy2aedf"
-  );
-  const bytes = bech32.fromWords(decoded.words);
-  const pubkey = bytesToHex(new Uint8Array(bytes));
-
-  useEffect(() => {
-    const pool = new SimplePool();
-    const relays = [
-      "wss://relay.nostr.band",
-      "wss://relay.nostr.bg",
-      "wss://relay.snort.social",
-      "wss://nos.lol",
-    ];
-    const h = pool.subscribeMany(
-      relays,
-      [
-        {
-          kinds: [30023],
-          authors: [pubkey],
-        },
-      ],
-      {
-        onevent(event) {
-          console.log(event);
-          const blog = {
-            id: event.id,
-            title:
-              event.tags.find((t: string[]) => t[0] === "title")?.[1] ||
-              "Untitled",
-            version:
-              event.tags.find((t: string[]) => t[0] === "d")?.[1] || "???",
-          };
-          setBlogs((prev) => [...prev, blog]);
-        },
-        oneose() {
-          h.close();
-        },
-      }
-    );
-
-    return () => {
-      h.close();
-    };
-  }, []);
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        alignItems: "center",
-        gap: "0px 8px",
-        color: "gray",
-      }}
-    >
-      {blogs.length > 0 && (
-        <Box
-          opacity={1}
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: "0px 8px",
-          }}
-        >
-          {blogs.map((blog) => (
-            <Link key={blog.id} href={`/blog/${blog.id}`} onPlay={onPlay}>
-              {blog.version}: {blog.title}
-            </Link>
-          ))}
-        </Box>
-      )}
-      {blogs.length === 0 && (
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          width="100%"
-        >
-          <CircularProgress isIndeterminate size="22px" color="gray" />
-        </Box>
-      )}
-    </div>
-  );
-}
-
 function Description({ onPlay }: { onPlay: () => void }) {
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
 
@@ -467,14 +348,14 @@ function Description({ onPlay }: { onPlay: () => void }) {
         marginRight: "16px",
       }}
     >
-      <div style={{ marginTop: "4px" }}>
+      <div style={{ marginTop: "16px" }}>
         <Subtitle title="music" />
         <div
           style={{
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
-            border: "1px solid lightgray",
+            // border: "1px solid lightgray",
             borderRadius: "100%",
             alignItems: "center",
             gap: "0px 4px",
@@ -489,82 +370,73 @@ function Description({ onPlay }: { onPlay: () => void }) {
             />
           ))}
         </div>
+      </div>
+
+      <div style={{ marginTop: "8px" }}>
+        <Subtitle title="sns" />
         <div
           style={{
-            marginTop: "8px",
-            border: "1px solid lightgray",
+            // border: "1px solid lightgray",
             borderRadius: "100%",
-            color: "gray",
-            display: "flex",
-            flexDirection: "column",
-            wordBreak: "break-all",
           }}
         >
-          <div
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              display: "flex",
-              wordBreak: "break-all",
-            }}
-          >
-            (npub1na482zlyyhvz9nml4hvypm439dp5r4ktuxphq9aqtd0ae2hl674sy2aedf)
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                gap: "0px 0px",
+              }}
+            >
+              <Link href="https://soundcloud.com/jumang4423/" onPlay={onPlay}>
+                soundcloud
+              </Link>
+              <Link onPlay={onPlay} href="https://scrapbox.io/jumang4423/">
+                scrapbox
+              </Link>
+              <Link onPlay={onPlay} href="https://github.com/jumang4423/">
+                github
+              </Link>
+              <Link onPlay={onPlay} href="https://twitter.com/jumang4423/">
+                x(twitter)
+              </Link>
+              <Link
+                onPlay={onPlay}
+                href="https://vrchat.com/home/user/usr_4b57f0ea-9bb7-4a9a-9f6c-42b3734c9ee3/"
+              >
+                vrchat
+              </Link>
+              <Link onPlay={onPlay} href="https://jumango.bandcamp.com/">
+                bandcamp
+              </Link>
+            </div>
           </div>
-          <BlogSystem onPlay={onPlay} />
         </div>
       </div>
 
-      <Subtitle title="sns" />
-      <div
-        style={{
-          border: "1px solid lightgray",
-          borderRadius: "100%",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              gap: "0px 0px",
-            }}
-          >
-            <Link href="https://soundcloud.com/jumang4423/" onPlay={onPlay}>
-              soundcloud
-            </Link>
-            <Link onPlay={onPlay} href="https://scrapbox.io/jumang4423/">
-              scrapbox
-            </Link>
-            <Link onPlay={onPlay} href="https://github.com/jumang4423/">
-              github
-            </Link>
-            <Link onPlay={onPlay} href="https://twitter.com/jumang4423/">
-              x(twitter)
-            </Link>
-            <Link
-              onPlay={onPlay}
-              href="https://vrchat.com/home/user/usr_4b57f0ea-9bb7-4a9a-9f6c-42b3734c9ee3/"
-            >
-              vrchat
-            </Link>
-            <Link onPlay={onPlay} href="https://jumango.bandcamp.com/">
-              bandcamp
-            </Link>
-          </div>
+      <div style={{ marginTop: "8px" }}>
+        <div
+          style={{
+            alignItems: "center",
+          }}
+        >
+          <Subtitle title="blog" />
+          <RecentBlogPosts onPlay={onPlay} />
         </div>
       </div>
+
       <div style={{ marginTop: "8px" }}>
         <Subtitle title="software" />
         <div
           style={{
             display: "flex",
             flexDirection: "row",
-            border: "1px solid lightgray",
+            // border: "1px solid lightgray",
             borderRadius: "100%",
             flexWrap: "wrap",
             alignItems: "center",
-            gap: "0px 0px",
+            gap: "4px 0px",
           }}
         >
           {soft.map((m: string, i: number) => (
@@ -578,17 +450,18 @@ function Description({ onPlay }: { onPlay: () => void }) {
           ))}
         </div>
       </div>
+
       <div style={{ marginTop: "8px" }}>
         <Subtitle title="cool people" />
         <div
           style={{
-            border: "1px solid lightgray",
+            // border: "1px solid lightgray",
             borderRadius: "100%",
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
             alignItems: "center",
-            gap: "0px 0px",
+            gap: "4px 0px",
             marginTop: "4px",
             marginBottom: "4px",
           }}
@@ -701,12 +574,6 @@ function App() {
       />
       <Header onPlay={onPlay} />
       <AIChat />
-      <Box position="relative" padding="4">
-        <Divider />
-        <AbsoluteCenter bg="white" px="4">
-          <div style={{ color: "gray" }}>*｡ ☆ ☆ ｡*</div>
-        </AbsoluteCenter>
-      </Box>
       <Description onPlay={onPlay} />
     </div>
   );

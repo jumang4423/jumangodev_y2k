@@ -3,7 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import App from "./App.tsx";
 import "./index.css";
-import Blog from "./Blog.tsx";
+import BlogList from "./BlogList.tsx";
+import MicroCMSBlog from "./MicroCMSBlog.tsx";
 
 const pinkTheme = extendTheme({
   colors: {
@@ -30,8 +31,12 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
+    path: "/blog",
+    element: <BlogList />,
+  },
+  {
     path: "/blog/:id",
-    element: <Blog />,
+    element: <MicroCMSBlog />,
   },
 ]);
 
