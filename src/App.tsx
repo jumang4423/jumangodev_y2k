@@ -6,7 +6,6 @@ import "./font.css";
 import hov_2 from "/hov_2.mp3";
 const captcha = "/captcha.mp4";
 import AIChat from "./AIChat";
-import { AbsoluteCenter, Box, Divider } from "@chakra-ui/react";
 import { useMediaQuery } from "@chakra-ui/react";
 import RecentBlogPosts from "./RecentBlogPosts";
 

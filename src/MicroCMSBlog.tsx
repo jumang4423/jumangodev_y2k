@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Divider, Spinner, Text } from "@chakra-ui/react";
 import { createClient } from "microcms-js-sdk";
-import { motion, transform } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface BlogPost {
   id: string;
@@ -10,6 +10,10 @@ interface BlogPost {
   content: string;
   publishedAt: string;
   updatedAt: string;
+  emoji: string;
+  eyecatch: {
+    url: string;
+  };
 }
 
 const client = createClient({
@@ -73,7 +77,10 @@ function MicroCMSBlog() {
           content: data.content,
           publishedAt: data.publishedAt,
           updatedAt: data.updatedAt,
+          emoji: data.emoji,
+          eyecatch: data.eyecatch,
         });
+        window.scrollTo(0, 0);
       } catch (err) {
         setError("Failed to fetch blog post.");
       } finally {
@@ -145,14 +152,45 @@ function MicroCMSBlog() {
             borderRadius: "100%",
             padding: "0 10px",
             marginTop: "10px",
+            display: "flex",
+            alignItems: "center",
           }}
         >
+          <div
+            style={{
+              animation: "rotate 7s linear infinite",
+              marginRight: "10px",
+            }}
+          >
+            {blog.emoji}
+          </div>
+          <style>
+            {`
+              @keyframes rotate {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+            `}
+          </style>
           {blog.title}
         </Text>
-        <Text fontSize="xl" color="gray" mb="4">
+        <Text fontSize="xl" color="gray" mb="1" mt="2">
           {">"} published at {new Date(blog.publishedAt).toLocaleDateString()}
         </Text>
+        <Box>
+          <img
+            src={blog.eyecatch.url}
+            alt={blog.title}
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "32px",
+              marginBottom: "16px",
+            }}
+          />
+        </Box>
         <div
+          className="blog_html"
           dangerouslySetInnerHTML={{ __html: blog.content }}
           style={{
             color: "gray",

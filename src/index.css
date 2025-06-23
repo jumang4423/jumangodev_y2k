@@ -75,3 +75,27 @@ button:focus-visible {
   background-color: lightgreen;
   color: white;
 }
+
+.blog_html {
+  a {
+    border: 1px solid lightgray;
+    border-radius: 100%;
+    margin: 0 4px;
+    word-break: keep-all;
+    transition: all 0.2s ease-in-out;
+  }
+  a:hover {
+    color: gray;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+
+  hr {
+    margin: 16px 0;
+  }
+
+  img {
+    border-radius: 32px;
+    margin: 16px 0;
+  }
+}

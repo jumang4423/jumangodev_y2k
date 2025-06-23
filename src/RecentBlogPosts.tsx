@@ -8,6 +8,7 @@ interface BlogPost {
   id: string;
   title: string;
   publishedAt: string;
+  emoji: string;
 }
 
 const client = createClient({
@@ -80,6 +81,7 @@ function RecentBlogPosts({ onPlay }: { onPlay: () => void }) {
               id: content.id,
               title: content.title,
               publishedAt: content.publishedAt,
+              emoji: content.emoji,
             })
           )
         );
@@ -112,7 +114,25 @@ function RecentBlogPosts({ onPlay }: { onPlay: () => void }) {
     >
       {blogs.map((blog) => (
         <Link key={blog.id} to={`/blog/${blog.id}`} onPlay={onPlay}>
-          {blog.title}
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <div
+              style={{
+                animation: "rotate 7s linear infinite",
+                marginRight: "4px",
+              }}
+            >
+              {blog.emoji}
+            </div>
+            <style>
+              {`
+              @keyframes rotate {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+            `}
+            </style>
+            {blog.title}
+          </div>
         </Link>
       ))}
       <Link to="/blog" onPlay={onPlay}>

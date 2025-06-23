@@ -8,6 +8,10 @@ interface BlogPost {
   id: string;
   title: string;
   publishedAt: string;
+  emoji: string;
+  eyecatch: {
+    url: string;
+  };
 }
 
 const client = createClient({
@@ -63,6 +67,8 @@ function BlogList() {
               id: content.id,
               title: content.title,
               publishedAt: content.publishedAt,
+              emoji: content.emoji,
+              eyecatch: content.eyecatch,
             })
           )
         );
@@ -148,14 +154,56 @@ function BlogList() {
               cursor="pointer"
               onClick={() => navigate(`/blog/${blog.id}`)}
               _hover={{ bg: "gray.50" }}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "16px",
+                alignItems: "center",
+              }}
             >
-              <Text fontSize="xl" fontWeight="bold" color="gray">
-                {blog.title}
-              </Text>
-              <Text fontSize="sm" color="gray">
-                {">"} published at{" "}
-                {new Date(blog.publishedAt).toLocaleDateString()}
-              </Text>
+              <img
+                src={blog.eyecatch.url}
+                alt={blog.title}
+                style={{
+                  width: "128px",
+                  height: "auto",
+                  borderRadius: "32px",
+                  marginBottom: "16px",
+                }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Box display="flex" alignItems="center">
+                  <div
+                    style={{
+                      animation: "rotate 7s linear infinite",
+                      marginRight: "4px",
+                    }}
+                  >
+                    {blog.emoji}
+                  </div>
+                  <style>
+                    {`
+                    @keyframes rotate {
+                      from { transform: rotate(0deg); }
+                      to { transform: rotate(360deg); }
+                    }
+                  `}
+                  </style>
+                  <Text fontSize="xl" fontWeight="bold" color="gray">
+                    {blog.title}
+                  </Text>
+                </Box>
+                <Text fontSize="sm" color="gray">
+                  {">"} published at{" "}
+                  {new Date(blog.publishedAt).toLocaleDateString()}
+                </Text>
+              </div>
             </Box>
           ))}
         </Box>
