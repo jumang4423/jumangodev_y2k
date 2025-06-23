@@ -5,8 +5,14 @@ import App from "./App.tsx";
 import "./index.css";
 import BlogList from "./BlogList.tsx";
 import MicroCMSBlog from "./MicroCMSBlog.tsx";
+import TechBlogList from "./TechBlogList.tsx";
+import MicroCMSTechBlog from "./MicroCMSTechBlog.tsx";
 
 const pinkTheme = extendTheme({
+  config: {
+    initialColorMode: 'light',
+    useSystemColorMode: false,
+  },
   colors: {
     brand: {
       100: "rgb(255, 184, 244)",
@@ -37,6 +43,14 @@ const router = createBrowserRouter([
   {
     path: "/blog/:id",
     element: <MicroCMSBlog />,
+  },
+  {
+    path: "/tech_blog",
+    element: <TechBlogList />,
+  },
+  {
+    path: "/tech_blog/:id",
+    element: <MicroCMSTechBlog />,
   },
 ]);
 

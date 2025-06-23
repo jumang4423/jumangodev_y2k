@@ -5,6 +5,7 @@
   font-weight: 400;
 
   background-color: #fff;
+  color-scheme: light only;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -97,5 +98,52 @@ button:focus-visible {
   img {
     border-radius: 32px;
     margin: 16px 0;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    line-height: 1.2;
+    margin: 24px 0 16px 0;
+    font-weight: bold;
+  }
+  
+  h1::before {
+    content: "🌈 ";
+    margin-right: 8px;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    line-height: 1.3;
+    margin: 20px 0 12px 0;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 1.25em;
+    line-height: 1.4;
+    margin: 16px 0 8px 0;
+    font-weight: bold;
+  }
+
+  h4 {
+    font-size: 1.1em;
+    line-height: 1.4;
+    margin: 14px 0 6px 0;
+    font-weight: bold;
+  }
+
+  h5 {
+    font-size: 1em;
+    line-height: 1.4;
+    margin: 12px 0 4px 0;
+    font-weight: bold;
+  }
+
+  h6 {
+    font-size: 0.9em;
+    line-height: 1.4;
+    margin: 10px 0 4px 0;
+    font-weight: bold;
   }
 }

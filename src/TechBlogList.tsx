@@ -4,7 +4,7 @@ import { Box, Divider, Spinner, Text } from "@chakra-ui/react";
 import { createClient } from "microcms-js-sdk";
 import { motion } from "framer-motion";
 
-interface BlogPost {
+interface TechBlogPost {
   id: string;
   title: string;
   publishedAt: string;
@@ -49,19 +49,19 @@ function Link({
   );
 }
 
-function BlogList() {
+function TechBlogList() {
   const navigate = useNavigate();
-  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [techBlogs, setTechBlogs] = useState<TechBlogPost[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchBlogs = async () => {
+    const fetchTechBlogs = async () => {
       try {
         const data = await client.get({
-          endpoint: "blog",
+          endpoint: "tech_blog",
         });
-        setBlogs(
+        setTechBlogs(
           data.contents.map(
             (content: { id: string; title: string; publishedAt: string }) => ({
               id: content.id,
@@ -73,13 +73,13 @@ function BlogList() {
           )
         );
       } catch (err) {
-        setError("Failed to fetch blog posts.");
+        setError("Failed to fetch tech blog posts.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchBlogs();
+    fetchTechBlogs();
   }, []);
 
   if (loading) {
@@ -141,18 +141,18 @@ function BlogList() {
             marginTop: "10px",
           }}
         >
-          Thoughts
+          Tech Blog Posts
         </Text>
         <Box mt="8">
-          {blogs.map((blog) => (
+          {techBlogs.map((techBlog) => (
             <Box
-              key={blog.id}
+              key={techBlog.id}
               p="4"
               border="1px solid lightgray"
               borderRadius="100%"
               mb="4"
               cursor="pointer"
-              onClick={() => navigate(`/blog/${blog.id}`)}
+              onClick={() => navigate(`/tech_blog/${techBlog.id}`)}
               _hover={{ bg: "gray.50" }}
               style={{
                 display: "flex",
@@ -162,8 +162,8 @@ function BlogList() {
               }}
             >
               <img
-                src={blog.eyecatch.url}
-                alt={blog.title}
+                src={techBlog.eyecatch.url}
+                alt={techBlog.title}
                 style={{
                   width: "128px",
                   height: "auto",
@@ -185,7 +185,7 @@ function BlogList() {
                       marginRight: "4px",
                     }}
                   >
-                    {blog.emoji}
+                    {techBlog.emoji}
                   </div>
                   <style>
                     {`
@@ -196,12 +196,12 @@ function BlogList() {
                   `}
                   </style>
                   <Text fontSize="xl" fontWeight="bold" color="gray">
-                    {blog.title}
+                    {techBlog.title}
                   </Text>
                 </Box>
                 <Text fontSize="sm" color="gray">
                   {">"} published at{" "}
-                  {new Date(blog.publishedAt).toLocaleDateString()}
+                  {new Date(techBlog.publishedAt).toLocaleDateString()}
                 </Text>
               </div>
             </Box>
@@ -212,4 +212,4 @@ function BlogList() {
   );
 }
 
-export default BlogList;
+export default TechBlogList;

@@ -8,6 +8,7 @@ const captcha = "/captcha.mp4";
 import AIChat from "./AIChat";
 import { useMediaQuery } from "@chakra-ui/react";
 import RecentBlogPosts from "./RecentBlogPosts";
+import RecentTechBlogPosts from "./RecentTechBlogPosts";
 
 const soft = [
   "treed-gpt",
@@ -420,8 +421,19 @@ function Description({ onPlay }: { onPlay: () => void }) {
             alignItems: "center",
           }}
         >
-          <Subtitle title="blog" />
+          <Subtitle title="thoughts" />
           <RecentBlogPosts onPlay={onPlay} />
+        </div>
+      </div>
+
+      <div style={{ marginTop: "8px" }}>
+        <div
+          style={{
+            alignItems: "center",
+          }}
+        >
+          <Subtitle title="tech blog" />
+          <RecentTechBlogPosts onPlay={onPlay} />
         </div>
       </div>
 

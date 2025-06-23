@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Box, Divider, Spinner, Text } from "@chakra-ui/react";
 import { createClient } from "microcms-js-sdk";
 import { motion } from "framer-motion";
 
-interface BlogPost {
+interface TechBlogPost {
   id: string;
   title: string;
+  content: string;
   publishedAt: string;
+  updatedAt: string;
   emoji: string;
   eyecatch: {
     url: string;
@@ -49,38 +51,45 @@ function Link({
   );
 }
 
-function BlogList() {
+function MicroCMSTechBlog() {
   const navigate = useNavigate();
-  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const { id } = useParams<{ id: string }>();
+  const [techBlog, setTechBlog] = useState<TechBlogPost | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchBlogs = async () => {
+    if (!id) {
+      setError("No tech blog ID provided.");
+      setLoading(false);
+      return;
+    }
+
+    const fetchTechBlog = async () => {
       try {
         const data = await client.get({
-          endpoint: "blog",
+          endpoint: "tech_blog",
+          contentId: id,
         });
-        setBlogs(
-          data.contents.map(
-            (content: { id: string; title: string; publishedAt: string }) => ({
-              id: content.id,
-              title: content.title,
-              publishedAt: content.publishedAt,
-              emoji: content.emoji,
-              eyecatch: content.eyecatch,
-            })
-          )
-        );
+        setTechBlog({
+          id: data.id,
+          title: data.title,
+          content: data.content,
+          publishedAt: data.publishedAt,
+          updatedAt: data.updatedAt,
+          emoji: data.emoji,
+          eyecatch: data.eyecatch,
+        });
+        window.scrollTo(0, 0);
       } catch (err) {
-        setError("Failed to fetch blog posts.");
+        setError("Failed to fetch tech blog post.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchBlogs();
-  }, []);
+    fetchTechBlog();
+  }, [id]);
 
   if (loading) {
     return (
@@ -101,6 +110,10 @@ function BlogList() {
         <Text color="red.500">Error: {error}</Text>
       </Box>
     );
+  }
+
+  if (!techBlog) {
+    return null;
   }
 
   return (
@@ -139,77 +152,54 @@ function BlogList() {
             borderRadius: "100%",
             padding: "0 10px",
             marginTop: "10px",
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          Thoughts
+          <div
+            style={{
+              animation: "rotate 7s linear infinite",
+              marginRight: "10px",
+            }}
+          >
+            {techBlog.emoji}
+          </div>
+          <style>
+            {`
+              @keyframes rotate {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+            `}
+          </style>
+          {techBlog.title}
         </Text>
-        <Box mt="8">
-          {blogs.map((blog) => (
-            <Box
-              key={blog.id}
-              p="4"
-              border="1px solid lightgray"
-              borderRadius="100%"
-              mb="4"
-              cursor="pointer"
-              onClick={() => navigate(`/blog/${blog.id}`)}
-              _hover={{ bg: "gray.50" }}
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: "16px",
-                alignItems: "center",
-              }}
-            >
-              <img
-                src={blog.eyecatch.url}
-                alt={blog.title}
-                style={{
-                  width: "128px",
-                  height: "auto",
-                  borderRadius: "32px",
-                  marginBottom: "16px",
-                }}
-              />
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <Box display="flex" alignItems="center">
-                  <div
-                    style={{
-                      animation: "rotate 7s linear infinite",
-                      marginRight: "4px",
-                    }}
-                  >
-                    {blog.emoji}
-                  </div>
-                  <style>
-                    {`
-                    @keyframes rotate {
-                      from { transform: rotate(0deg); }
-                      to { transform: rotate(360deg); }
-                    }
-                  `}
-                  </style>
-                  <Text fontSize="xl" fontWeight="bold" color="gray">
-                    {blog.title}
-                  </Text>
-                </Box>
-                <Text fontSize="sm" color="gray">
-                  {">"} published at{" "}
-                  {new Date(blog.publishedAt).toLocaleDateString()}
-                </Text>
-              </div>
-            </Box>
-          ))}
+        <Text fontSize="xl" color="gray" mb="1" mt="2">
+          {">"} published at {new Date(techBlog.publishedAt).toLocaleDateString()}
+        </Text>
+        <Box>
+          <img
+            src={techBlog.eyecatch.url}
+            alt={techBlog.title}
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "32px",
+              marginBottom: "16px",
+            }}
+          />
         </Box>
+        <div
+          className="blog_html"
+          dangerouslySetInnerHTML={{ __html: techBlog.content }}
+          style={{
+            color: "gray",
+            lineHeight: "1.6",
+          }}
+        />
       </Box>
     </div>
   );
 }
 
-export default BlogList;
+export default MicroCMSTechBlog;
