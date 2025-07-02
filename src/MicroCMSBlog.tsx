@@ -119,7 +119,7 @@ function MicroCMSBlog() {
   return (
     <div
       style={{
-        fontFamily: "Iosevka Aile Iaso, Kiwi Maru,Transparent",
+        fontFamily: "Doto, Kiwi Maru, Transparent",
         maxWidth: "600px",
         fontSize: "17px",
         wordBreak: "break-all",

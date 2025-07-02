@@ -35,7 +35,7 @@ function Link({
       whileHover={{ scale: disabled ? 1.0 : 1.25 }}
       style={{
         marginLeft: "6px",
-        color: "gray",
+        color: "black",
         borderRadius: "100%",
         border: "1px solid lightgray",
         fontWeight: "normal",

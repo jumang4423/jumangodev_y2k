@@ -261,7 +261,7 @@ function Link({
       target="_blank"
       style={{
         marginLeft: "6px",
-        color: "gray",
+        color: "black",
         borderRadius: "100%",
         border: "1px solid lightgray",
         fontWeight: "normal",
@@ -284,8 +284,9 @@ function Subtitle({ title }: { title: string }) {
       style={{
         marginTop: "8px",
         width: "150px",
-        color: "#d0f0d8",
-        fontSize: "24px",
+        color: "#90daa3ff",
+        fontSize: "20px",
+        fontWeight: "700",
         transform: "scaleX(2.2) translateX(40px)",
         textAlign: "left",
       }}
@@ -568,7 +569,7 @@ function App() {
   return (
     <div
       style={{
-        fontFamily: "Iosevka Aile Iaso, Transparent",
+        fontFamily: "Doto, Transparent",
         maxWidth: "600px",
         fontSize: "17px",
         wordBreak: "break-all",

@@ -34,7 +34,7 @@ function Link({
       whileHover={{ scale: disabled ? 1.0 : 1.25 }}
       style={{
         marginLeft: "6px",
-        color: "gray",
+        color: "black",
         borderRadius: "100%",
         border: "1px solid lightgray",
         fontWeight: "normal",
@@ -106,7 +106,7 @@ function TechBlogList() {
   return (
     <div
       style={{
-        fontFamily: "Iosevka Aile Iaso, Kiwi Maru,Transparent",
+        fontFamily: "Doto, Kiwi Maru, Transparent",
         maxWidth: "600px",
         fontSize: "17px",
         wordBreak: "break-all",

@@ -29,6 +29,7 @@
     "wanakana": "^5.3.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.53.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",

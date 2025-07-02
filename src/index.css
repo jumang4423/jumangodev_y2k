@@ -1,8 +1,8 @@
 :root {
-  font-family: "Iosevka Term", Inter, system-ui, Avenir, Helvetica, Arial,
+  font-family: "Doto", Inter, system-ui, Avenir, Helvetica, Arial,
     sans-serif;
   line-height: 1;
-  font-weight: 400;
+  font-weight: 600;
 
   background-color: #fff;
   color-scheme: light only;
@@ -15,11 +15,11 @@
 }
 
 a {
-  font-weight: 300;
+  font-weight: 500;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #000000;
 }
 
 body {
@@ -39,7 +39,7 @@ button {
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 300;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
@@ -86,7 +86,7 @@ button:focus-visible {
     transition: all 0.2s ease-in-out;
   }
   a:hover {
-    color: gray;
+    color: black;
     font-weight: 500;
     transition: all 0.2s ease-in-out;
   }
