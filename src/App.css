@@ -1,11 +1,11 @@
 #root {
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 1.25rem 0;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 7.5em;
+  padding: 1.875em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -17,7 +17,7 @@
 }
 
 .card {
-  padding: 2em;
+  padding: 2.5em;
 }
 
 .read-the-docs {

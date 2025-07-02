@@ -46,7 +46,7 @@ const UserMessage: React.FC<{ message: Message; isUser: boolean }> = ({
       p={1}
       mt={0.5}
       borderRadius="100%"
-      border="1px solid lightgray"
+      border="1.25px solid lightgray"
       display="inline-block"
       maxW="100%"
       ml="auto"
@@ -131,10 +131,10 @@ const AIChat = () => {
   return (
     <div
       style={{
-        marginTop: "16px",
-        marginLeft: "16px",
-        marginRight: "16px",
-        marginBottom: "-4px",
+        marginTop: "20px",
+        marginLeft: "20px",
+        marginRight: "20px",
+        marginBottom: "-5px",
       }}
     >
       <AnimalesePlayer text={latestAIResponse} lettersFile="/animalese.wav" />
@@ -146,7 +146,7 @@ const AIChat = () => {
             hidden={userInput === ""}
           >
             {isSubmitting ? (
-              <l-quantum size="18" speed="1.5" color={"black"} />
+              <l-quantum size="22.5" speed="1.5" color={"black"} />
             ) : (
               <ArrowForwardIcon />
             )}

@@ -194,9 +194,9 @@ function Header({ onPlay }: { onPlay: () => void }) {
       style={{
         display: "flex",
         alignItems: isMobile ? "flex-start" : "center",
-        marginTop: "-16px",
+        marginTop: "-20px",
         justifyContent: "center",
-        marginBottom: "-12px",
+        marginBottom: "-15px",
         flexDirection: "column",
       }}
     >
@@ -207,10 +207,10 @@ function Header({ onPlay }: { onPlay: () => void }) {
           loop
           playsInline
           muted
-          width={550}
+          width={687.5}
           style={{
-            marginLeft: "-8px",
-            marginTop: "-16px",
+            marginLeft: "-10px",
+            marginTop: "-20px",
             objectFit: "cover",
             filter: "brightness(1.01)",
           }}
@@ -222,13 +222,13 @@ function Header({ onPlay }: { onPlay: () => void }) {
           alt="Juma"
           style={{
             objectFit: "cover",
-            paddingTop: "10px",
+            paddingTop: "12.5px",
             width: "100%",
           }}
         />
       )}
       <div
-        style={{ alignSelf: "flex-end", color: "gray", marginRight: "12px" }}
+        style={{ alignSelf: "flex-end", color: "gray", marginRight: "15px" }}
       >
         art
         <Link href="https://x.com/ggeyegg" onPlay={onPlay}>
@@ -260,10 +260,10 @@ function Link({
       href={disabled ? "#" : href}
       target="_blank"
       style={{
-        marginLeft: "6px",
+        marginLeft: "7.5px",
         color: "black",
         borderRadius: "100%",
-        border: "1px solid lightgray",
+        border: "1.25px solid lightgray",
         fontWeight: "normal",
         padding: "0 0px",
         filter: `opacity(${disabled ? 0.3 : 1.0})`,
@@ -282,12 +282,12 @@ function Subtitle({ title }: { title: string }) {
   return (
     <div
       style={{
-        marginTop: "8px",
-        width: "150px",
+        marginTop: "10px",
+        width: "187.5px",
         color: "#90daa3ff",
-        fontSize: "20px",
+        fontSize: "25px",
         fontWeight: "700",
-        transform: "scaleX(2.2) translateX(40px)",
+        transform: "scaleX(2.2) translateX(50px)",
         textAlign: "left",
       }}
     >
@@ -312,13 +312,13 @@ function SoundCloudLinkCard({
       style={{
         display: "flex",
         alignItems: "center",
-        marginTop: "4px",
+        marginTop: "5px",
       }}
     >
       <img
         src={imgSrc}
-        width={32}
-        height={32}
+        width={40}
+        height={40}
         style={{ borderRadius: "100%" }}
       />
       <Link href={href} onPlay={onPlay}>
@@ -345,11 +345,11 @@ function Description({ onPlay }: { onPlay: () => void }) {
   return (
     <div
       style={{
-        marginLeft: "16px",
-        marginRight: "16px",
+        marginLeft: "20px",
+        marginRight: "20px",
       }}
     >
-      <div style={{ marginTop: "16px" }}>
+      <div style={{ marginTop: "20px" }}>
         <Subtitle title="music" />
         <div
           style={{
@@ -359,7 +359,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
             // border: "1px solid lightgray",
             borderRadius: "100%",
             alignItems: "center",
-            gap: "0px 4px",
+            gap: "0px 5px",
           }}
         >
           {music.map((m) => (
@@ -373,7 +373,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
         </div>
       </div>
 
-      <div style={{ marginTop: "8px" }}>
+      <div style={{ marginTop: "10px" }}>
         <Subtitle title="sns" />
         <div
           style={{
@@ -416,7 +416,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
         </div>
       </div>
 
-      <div style={{ marginTop: "8px" }}>
+      <div style={{ marginTop: "10px" }}>
         <div
           style={{
             alignItems: "center",
@@ -427,7 +427,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
         </div>
       </div>
 
-      <div style={{ marginTop: "8px" }}>
+      <div style={{ marginTop: "10px" }}>
         <div
           style={{
             alignItems: "center",
@@ -438,7 +438,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
         </div>
       </div>
 
-      <div style={{ marginTop: "8px" }}>
+      <div style={{ marginTop: "10px" }}>
         <Subtitle title="software" />
         <div
           style={{
@@ -448,7 +448,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
             borderRadius: "100%",
             flexWrap: "wrap",
             alignItems: "center",
-            gap: "4px 0px",
+            gap: "5px 0px",
           }}
         >
           {soft.map((m: string, i: number) => (
@@ -463,7 +463,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
         </div>
       </div>
 
-      <div style={{ marginTop: "8px" }}>
+      <div style={{ marginTop: "10px" }}>
         <Subtitle title="cool people" />
         <div
           style={{
@@ -473,9 +473,9 @@ function Description({ onPlay }: { onPlay: () => void }) {
             flexDirection: "row",
             flexWrap: "wrap",
             alignItems: "center",
-            gap: "4px 0px",
-            marginTop: "4px",
-            marginBottom: "4px",
+            gap: "5px 0px",
+            marginTop: "5px",
+            marginBottom: "5px",
           }}
         >
           {kewlp.map((m, i: number) => (
@@ -489,7 +489,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
       <Subtitle title="pinterest" />
       <div
         style={{
-          marginTop: "16px",
+          marginTop: "20px",
         }}
       >
         <a
@@ -513,17 +513,17 @@ function Description({ onPlay }: { onPlay: () => void }) {
           src="https://weepjp.neocities.org/harbot/"
           style={{
             border: "none",
-            marginTop: "8px",
-            width: "135px",
-            height: "210px",
-            marginBottom: "16px",
+            marginTop: "10px",
+            width: "168.75px",
+            height: "262.5px",
+            marginBottom: "20px",
           }}
           scrolling="no"
         />
         <div
           style={{
-            marginLeft: "16px",
-            marginTop: "8px",
+            marginLeft: "20px",
+            marginTop: "10px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -537,7 +537,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
           directories, all accompanied by cute characters
         </div>
       </div>
-      <div style={{ marginBottom: 256 }}></div>
+      <div style={{ marginBottom: 320 }}></div>
     </div>
   );
 }
@@ -570,8 +570,8 @@ function App() {
     <div
       style={{
         fontFamily: "Doto, Transparent",
-        maxWidth: "600px",
-        fontSize: "17px",
+        maxWidth: "750px",
+        fontSize: "21.25px",
         wordBreak: "break-all",
       }}
     >
