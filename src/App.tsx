@@ -32,6 +32,8 @@ const soft = [
   "dog_rotation",
   "jungle98",
   "hack-the-music",
+  "patchrome-ext",
+  "business-card-pcb",
 ];
 
 const music = [
@@ -283,11 +285,11 @@ function Subtitle({ title }: { title: string }) {
     <div
       style={{
         marginTop: "8px",
-        width: "150px",
+        width: "140px",
         color: "#90daa3ff",
         fontSize: "20px",
         fontWeight: "700",
-        transform: "scaleX(2.2) translateX(40px)",
+        transform: "scaleX(2.4) translateX(41px) scaleY(0.9)",
         textAlign: "left",
       }}
     >
@@ -464,7 +466,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
       </div>
 
       <div style={{ marginTop: "8px" }}>
-        <Subtitle title="cool people" />
+        <Subtitle title="recommend" />
         <div
           style={{
             // border: "1px solid lightgray",
