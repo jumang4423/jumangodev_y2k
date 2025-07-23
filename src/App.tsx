@@ -289,7 +289,7 @@ function Subtitle({ title }: { title: string }) {
         color: "#90daa3ff",
         fontSize: "20px",
         fontWeight: "700",
-        transform: "scaleX(2.4) translateX(41px) scaleY(0.9)",
+        transform: "scaleX(2.4) translateX(41px)",
         textAlign: "left",
       }}
     >
