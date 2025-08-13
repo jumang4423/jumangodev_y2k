@@ -8,7 +8,6 @@ const captcha = "/captcha.mp4";
 import AIChat from "./AIChat";
 import { useMediaQuery } from "@chakra-ui/react";
 import RecentBlogPosts from "./RecentBlogPosts";
-import RecentTechBlogPosts from "./RecentTechBlogPosts";
 
 const soft = [
   "treed-gpt",
@@ -22,16 +21,13 @@ const soft = [
   "pen.el",
   "who_unfollowed_sc_batch",
   "power_tone",
-  "surveillance_list",
   "ghidra_gpt3",
   "screamdb",
   "chip8-rs",
-  "hentai_dream_95",
   "rust_path_tracer",
   "nysh",
   "dog_rotation",
   "jungle98",
-  "hack-the-music",
   "patchrome-ext",
   "business-card-pcb",
 ];
@@ -105,88 +101,6 @@ const music = [
   },
 ];
 
-const kewlp = [
-  {
-    title: "wag_gaw",
-    href: "https://soundcloud.com/wag_gaw",
-  },
-  {
-    title: "hakushi-hasegawa",
-    href: "https://soundcloud.com/hakushi-hasegawa",
-  },
-  {
-    title: "heoliene",
-    href: "https://soundcloud.com/heoliene",
-  },
-  {
-    title: "ulla",
-    href: "https://soundcloud.com/ullastraus",
-  },
-  {
-    title: "vanfleet",
-    href: "https://soundcloud.com/vanfleet",
-  },
-  {
-    title: "1_mm",
-    href: "https://soundcloud.com/1_mm",
-  },
-  {
-    title: "voboku",
-    href: "https://soundcloud.com/voboku",
-  },
-  {
-    title: "unitkai",
-    href: "https://soundcloud.com/unitkai",
-  },
-  {
-    title: "mononomonooto",
-    href: "https://soundcloud.com/mononomonooto",
-  },
-  {
-    title: "0-nobody",
-    href: "https://soundcloud.com/0-nobody",
-  },
-  {
-    title: "syzymusic",
-    href: "https://soundcloud.com/syzymusic",
-  },
-  {
-    title: "indigoindigo000",
-    href: "https://soundcloud.com/indigoindigo000",
-  },
-  {
-    title: "acounta",
-    href: "https://soundcloud.com/acounta",
-  },
-  {
-    title: "themetaroom",
-    href: "https://soundcloud.com/themetaroom",
-  },
-  {
-    title: "yanagamiyuki",
-    href: "https://soundcloud.com/yanagamiyuki",
-  },
-  {
-    title: "sv1",
-    href: "https://soundcloud.com/sv1",
-  },
-  {
-    title: "aruku_a_dark",
-    href: "https://soundcloud.com/aruku_a_dark",
-  },
-  {
-    title: "shibeat",
-    href: "https://soundcloud.com/shibeat",
-  },
-  {
-    title: "factal",
-    href: "https://soundcloud.com/factal",
-  },
-  {
-    title: "tau contrib",
-    href: "https://soundcloud.com/taucontrib",
-  },
-];
 
 function Header({ onPlay }: { onPlay: () => void }) {
   const [isMobile] = useMediaQuery("(max-width: 600px)");
@@ -410,9 +324,6 @@ function Description({ onPlay }: { onPlay: () => void }) {
               >
                 vrchat
               </Link>
-              <Link onPlay={onPlay} href="https://jumango.bandcamp.com/">
-                bandcamp
-              </Link>
             </div>
           </div>
         </div>
@@ -429,16 +340,6 @@ function Description({ onPlay }: { onPlay: () => void }) {
         </div>
       </div>
 
-      <div style={{ marginTop: "8px" }}>
-        <div
-          style={{
-            alignItems: "center",
-          }}
-        >
-          <Subtitle title="tech blog" />
-          <RecentTechBlogPosts onPlay={onPlay} />
-        </div>
-      </div>
 
       <div style={{ marginTop: "8px" }}>
         <Subtitle title="software" />
@@ -465,28 +366,6 @@ function Description({ onPlay }: { onPlay: () => void }) {
         </div>
       </div>
 
-      <div style={{ marginTop: "8px" }}>
-        <Subtitle title="recommend" />
-        <div
-          style={{
-            // border: "1px solid lightgray",
-            borderRadius: "100%",
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            alignItems: "center",
-            gap: "4px 0px",
-            marginTop: "4px",
-            marginBottom: "4px",
-          }}
-        >
-          {kewlp.map((m, i: number) => (
-            <Link href={m.href} onPlay={onPlay} key={i}>
-              {m.title}
-            </Link>
-          ))}
-        </div>
-      </div>
 
       <Subtitle title="pinterest" />
       <div
