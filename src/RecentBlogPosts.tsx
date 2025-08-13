@@ -32,12 +32,12 @@ function Link({
   return (
     <motion.div
       initial={{ scale: 1.0 }}
-      whileHover={{ scale: disabled ? 1.0 : 1.25 }}
+      whileHover={{ scale: disabled ? 1.0 : 1.125 }} /* 90% of 1.25 */
       style={{
-        marginLeft: "6px",
+        marginLeft: "5.4px", /* 90% of 6px */
         color: "black",
         borderRadius: "100%",
-        border: "1px solid lightgray",
+        border: "0.9px solid lightgray", /* 90% of 1px */
         fontWeight: "normal",
         padding: "0 0px",
         filter: `opacity(${disabled ? 0.3 : 1.0})`,
@@ -53,7 +53,7 @@ function Link({
           textDecoration: "none",
           color: "inherit",
           display: "block",
-          padding: "0 8px",
+          padding: "0 7.2px", /* 90% of 8px */
           fontWeight: "normal",
         }}
       >
@@ -118,7 +118,7 @@ function RecentBlogPosts({ onPlay }: { onPlay: () => void }) {
             <div
               style={{
                 animation: "rotate 7s linear infinite",
-                marginRight: "4px",
+                marginRight: "3.6px", /* 90% of 4px */
               }}
             >
               {blog.emoji}

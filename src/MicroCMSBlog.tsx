@@ -33,14 +33,14 @@ function Link({
   return (
     <motion.button
       initial={{ scale: 1.0 }}
-      whileHover={{ scale: disabled ? 1.0 : 1.25 }}
+      whileHover={{ scale: disabled ? 1.0 : 1.125 }} /* 90% of 1.25 */
       style={{
-        marginLeft: "6px",
+        marginLeft: "5.4px", /* 90% of 6px */
         color: "gray",
         borderRadius: "100%",
-        border: "1px solid lightgray",
+        border: "0.9px solid lightgray", /* 90% of 1px */
         fontWeight: "normal",
-        padding: "0 8px",
+        padding: "0 7.2px", /* 90% of 8px */
         filter: `opacity(${disabled ? 0.3 : 1.0})`,
         background: "none",
       }}
@@ -120,11 +120,11 @@ function MicroCMSBlog() {
     <div
       style={{
         fontFamily: "Doto, Kiwi Maru, Transparent",
-        maxWidth: "600px",
-        fontSize: "17px",
+        maxWidth: "540px", /* 90% of 600px */
+        fontSize: "15.3px", /* 90% of 17px */
         wordBreak: "break-all",
         margin: "0 auto",
-        padding: "1rem",
+        padding: "0.9rem", /* 90% of 1rem */
       }}
     >
       <link
@@ -148,10 +148,10 @@ function MicroCMSBlog() {
           fontWeight="bold"
           color="gray"
           style={{
-            border: "1px solid lightgray",
+            border: "0.9px solid lightgray", /* 90% of 1px */
             borderRadius: "100%",
-            padding: "0 10px",
-            marginTop: "10px",
+            padding: "0 9px", /* 90% of 10px */
+            marginTop: "9px", /* 90% of 10px */
             display: "flex",
             alignItems: "center",
           }}
@@ -159,7 +159,7 @@ function MicroCMSBlog() {
           <div
             style={{
               animation: "rotate 7s linear infinite",
-              marginRight: "10px",
+              marginRight: "9px", /* 90% of 10px */
             }}
           >
             {blog.emoji}
@@ -185,7 +185,7 @@ function MicroCMSBlog() {
               width: "100%",
               height: "auto",
               borderRadius: "32px",
-              marginBottom: "16px",
+              marginBottom: "14.4px", /* 90% of 16px */
             }}
           />
         </Box>

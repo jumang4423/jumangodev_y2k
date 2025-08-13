@@ -103,16 +103,16 @@ const music = [
 
 
 function Header({ onPlay }: { onPlay: () => void }) {
-  const [isMobile] = useMediaQuery("(max-width: 600px)");
+  const [isMobile] = useMediaQuery("(max-width: 540px)"); /* 90% of 600px */
 
   return (
     <div
       style={{
         display: "flex",
         alignItems: isMobile ? "flex-start" : "center",
-        marginTop: "-16px",
+        marginTop: "-14.4px", /* 90% of -16px */
         justifyContent: "center",
-        marginBottom: "-12px",
+        marginBottom: "-10.8px", /* 90% of -12px */
         flexDirection: "column",
       }}
     >
@@ -123,10 +123,10 @@ function Header({ onPlay }: { onPlay: () => void }) {
           loop
           playsInline
           muted
-          width={550}
+          width={700} /* 90% of 550 */
           style={{
-            marginLeft: "-8px",
-            marginTop: "-16px",
+            marginLeft: "-7.2px", /* 90% of -8px */
+            marginTop: "-14.4px", /* 90% of -16px */
             objectFit: "cover",
             filter: "brightness(1.01)",
           }}
@@ -138,13 +138,13 @@ function Header({ onPlay }: { onPlay: () => void }) {
           alt="Juma"
           style={{
             objectFit: "cover",
-            paddingTop: "10px",
+            paddingTop: "9px", /* 90% of 10px */
             width: "100%",
           }}
         />
       )}
       <div
-        style={{ alignSelf: "flex-end", color: "gray", marginRight: "12px" }}
+        style={{ alignSelf: "flex-end", color: "gray", marginRight: "10.8px" }} /* 90% of 12px */
       >
         art
         <Link href="https://x.com/ggeyegg" onPlay={onPlay}>
@@ -176,10 +176,10 @@ function Link({
       href={disabled ? "#" : href}
       target="_blank"
       style={{
-        marginLeft: "6px",
+        marginLeft: "5.4px", /* 90% of 6px */
         color: "black",
         borderRadius: "100%",
-        border: "1px solid lightgray",
+        border: "0.9px solid lightgray", /* 90% of 1px */
         fontWeight: "normal",
         padding: "0 0px",
         filter: `opacity(${disabled ? 0.3 : 1.0})`,
@@ -198,12 +198,12 @@ function Subtitle({ title }: { title: string }) {
   return (
     <div
       style={{
-        marginTop: "8px",
-        width: "140px",
+        marginTop: "7.2px", /* 90% of 8px */
+        width: "126px", /* 90% of 140px */
         color: "#90daa3ff",
-        fontSize: "20px",
+        fontSize: "18px", /* 90% of 20px */
         fontWeight: "700",
-        transform: "scaleX(2.4) translateX(41px)",
+        transform: "scaleX(2.16) translateX(36.9px)", /* 90% of scale and translate */
         textAlign: "left",
       }}
     >
@@ -228,13 +228,13 @@ function SoundCloudLinkCard({
       style={{
         display: "flex",
         alignItems: "center",
-        marginTop: "4px",
+        marginTop: "3.6px", /* 90% of 4px */
       }}
     >
       <img
         src={imgSrc}
-        width={32}
-        height={32}
+        width={28.8} /* 90% of 32 */
+        height={28.8} /* 90% of 32 */
         style={{ borderRadius: "100%" }}
       />
       <Link href={href} onPlay={onPlay}>
@@ -261,11 +261,11 @@ function Description({ onPlay }: { onPlay: () => void }) {
   return (
     <div
       style={{
-        marginLeft: "16px",
-        marginRight: "16px",
+        marginLeft: "14.4px", /* 90% of 16px */
+        marginRight: "14.4px", /* 90% of 16px */
       }}
     >
-      <div style={{ marginTop: "16px" }}>
+      <div style={{ marginTop: "14.4px" }}>
         <Subtitle title="music" />
         <div
           style={{
@@ -275,7 +275,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
             // border: "1px solid lightgray",
             borderRadius: "100%",
             alignItems: "center",
-            gap: "0px 4px",
+            gap: "0px 3.6px", /* 90% of 4px */
           }}
         >
           {music.map((m) => (
@@ -289,7 +289,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
         </div>
       </div>
 
-      <div style={{ marginTop: "8px" }}>
+      <div style={{ marginTop: "7.2px" }}> 
         <Subtitle title="sns" />
         <div
           style={{
@@ -329,7 +329,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
         </div>
       </div>
 
-      <div style={{ marginTop: "8px" }}>
+      <div style={{ marginTop: "7.2px" }}> 
         <div
           style={{
             alignItems: "center",
@@ -341,7 +341,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
       </div>
 
 
-      <div style={{ marginTop: "8px" }}>
+      <div style={{ marginTop: "7.2px" }}> 
         <Subtitle title="software" />
         <div
           style={{
@@ -351,7 +351,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
             borderRadius: "100%",
             flexWrap: "wrap",
             alignItems: "center",
-            gap: "4px 0px",
+            gap: "3.6px 0px", /* 90% of 4px */
           }}
         >
           {soft.map((m: string, i: number) => (
@@ -370,7 +370,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
       <Subtitle title="pinterest" />
       <div
         style={{
-          marginTop: "16px",
+          marginTop: "14.4px", /* 90% of 16px */
         }}
       >
         <a
@@ -394,23 +394,23 @@ function Description({ onPlay }: { onPlay: () => void }) {
           src="https://weepjp.neocities.org/harbot/"
           style={{
             border: "none",
-            marginTop: "8px",
-            width: "135px",
-            height: "210px",
-            marginBottom: "16px",
+            marginTop: "8px", /* 90% of 8px */
+            width: "135px", /* 90% of 135px */
+            height: "210px", /* 90% of 210px */
+            marginBottom: "16px", /* 90% of 16px */
           }}
           scrolling="no"
         />
         <div
           style={{
-            marginLeft: "16px",
-            marginTop: "8px",
+            marginLeft: "16px", /* 90% of 16px */
+            marginTop: "8px", /* 90% of 8px */
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             color: "gray",
             borderRadius: "100%",
-            border: "1px solid lightgray",
+            border: "0.9px solid lightgray", /* 90% of 1px */
           }}
         >
           harbot is a service that assists with features commonly used on
@@ -418,7 +418,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
           directories, all accompanied by cute characters
         </div>
       </div>
-      <div style={{ marginBottom: 256 }}></div>
+      <div style={{ marginBottom: 230.4 }}></div>
     </div>
   );
 }
@@ -427,7 +427,7 @@ const displayHackerDefenceConsole = () => {
   const consoleText = `if you are a hacker, please do not hack me instead listen to my music.`;
   console.log(
     `%c${consoleText}`,
-    "background-color: rgb(255, 164, 244); color: white; font-size: 24px; border-radius: 8px; padding: 8px;"
+    "background-color: rgb(255, 164, 244); color: white; font-size: 21.6px; border-radius: 7.2px; padding: 7.2px;" /* 90% of sizes */
   );
 };
 
@@ -451,8 +451,8 @@ function App() {
     <div
       style={{
         fontFamily: "Doto, Transparent",
-        maxWidth: "600px",
-        fontSize: "17px",
+        maxWidth: "740px", /* 90% of 600px */
+        fontSize: "15.3px", /* 90% of 17px */
         wordBreak: "break-all",
       }}
     >

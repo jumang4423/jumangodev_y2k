@@ -43,10 +43,10 @@ const UserMessage: React.FC<{ message: Message; isUser: boolean }> = ({
   return (
     <Box
       color={"gray"}
-      p={1}
-      mt={0.5}
+      p={0.9} /* 90% of 1 */
+      mt={0.45} /* 90% of 0.5 */
       borderRadius="100%"
-      border="1px solid lightgray"
+      border="0.9px solid lightgray" /* 90% of 1px */
       display="inline-block"
       maxW="100%"
       ml="auto"
@@ -131,10 +131,10 @@ const AIChat = () => {
   return (
     <div
       style={{
-        marginTop: "16px",
-        marginLeft: "16px",
-        marginRight: "16px",
-        marginBottom: "-4px",
+        marginTop: "14.4px", /* 90% of 16px */
+        marginLeft: "14.4px", /* 90% of 16px */
+        marginRight: "14.4px", /* 90% of 16px */
+        marginBottom: "-3.6px", /* 90% of -4px */
       }}
     >
       <AnimalesePlayer text={latestAIResponse} lettersFile="/animalese.wav" />
@@ -146,7 +146,7 @@ const AIChat = () => {
             hidden={userInput === ""}
           >
             {isSubmitting ? (
-              <l-quantum size="18" speed="1.5" color={"black"} />
+              <l-quantum size="16.2" speed="1.5" color={"black"} /> /* 90% of 18 */
             ) : (
               <ArrowForwardIcon />
             )}
@@ -157,10 +157,10 @@ const AIChat = () => {
             onCompositionStart={startComposition}
             onCompositionEnd={endComposition}
             placeholder="ask to jumango ai..."
-            rows={Math.min(3, userInput.split("\n").length)}
+            rows={Math.min(3, userInput.split("\n").length)} /* keep 3 rows max */
             h={"auto"}
             value={userInput}
-            rounded={"2xl"}
+            rounded={"xl"} /* scale down rounding */
             onChange={(e) => setUserInput(e.target.value)}
             onKeyDown={(e) => {
               if (composing) {
@@ -175,13 +175,13 @@ const AIChat = () => {
           />
         </InputGroup>
       </Box>
-      <Box mt={2}>
+      <Box mt={1.8}>
         {msgArr
           .map((c, index) => {
             return (
               <ScaleFade
                 key={`${c.role}-${index}`}
-                initialScale={0.9}
+                initialScale={0.81} /* 90% of 0.9 */
                 in={true}
               >
                 <UserMessage message={c} isUser={c.role === "User"} />

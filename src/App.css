@@ -1,11 +1,11 @@
 #root {
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 0.9rem 0; /* 90% of 1rem */
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 5.4em; /* 90% of 6em */
+  padding: 1.35em; /* 90% of 1.5em */
   will-change: filter;
   transition: filter 300ms;
 }
@@ -17,7 +17,7 @@
 }
 
 .card {
-  padding: 2em;
+  padding: 1.8em; /* 90% of 2em */
 }
 
 .read-the-docs {
@@ -28,7 +28,7 @@
   display: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 540px) { /* 90% of 600px */
   .header-video-container {
     display: none;
     margin-left: 0;
