@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Divider, Spinner, Text } from "@chakra-ui/react";
+import { Box, Divider, Spinner, Text, useMediaQuery } from "@chakra-ui/react";
 import { createClient } from "microcms-js-sdk";
 import { motion } from "framer-motion";
 
@@ -19,14 +19,24 @@ const client = createClient({
   apiKey: "NrXtEm2HTvhho5hgmmmqCUmZwgEpGvqGp2x3",
 });
 
+interface GenericBlogListProps {
+  endpoint: "blog" | "tech_blog";
+  routeBase: "/blog" | "/tech_blog";
+  title: string;
+  linkColor: string;
+  borderWidth: string;
+}
+
 function Link({
   children,
   onClick,
   disabled = false,
+  color = "gray",
 }: {
   children: React.ReactNode;
   onClick: () => void;
   disabled?: boolean;
+  color?: string;
 }) {
   return (
     <motion.button
@@ -34,7 +44,7 @@ function Link({
       whileHover={{ scale: disabled ? 1.0 : 1.125 }} /* 90% of 1.25 */
       style={{
         marginLeft: "5.4px", /* 90% of 6px */
-        color: "gray",
+        color: color,
         borderRadius: "100%",
         border: "0.9px solid lightgray", /* 90% of 1px */
         fontWeight: "normal",
@@ -49,17 +59,24 @@ function Link({
   );
 }
 
-function BlogList() {
+function GenericBlogList({ 
+  endpoint, 
+  routeBase, 
+  title, 
+  linkColor, 
+  borderWidth 
+}: GenericBlogListProps) {
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isMobile] = useMediaQuery("(max-width: 540px)");
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const data = await client.get({
-          endpoint: "blog",
+          endpoint: endpoint,
         });
         setBlogs(
           data.contents.map(
@@ -73,14 +90,14 @@ function BlogList() {
           )
         );
       } catch (err) {
-        setError("Failed to fetch blog posts.");
+        setError(`Failed to fetch ${endpoint === "blog" ? "blog" : "tech blog"} posts.`);
       } finally {
         setLoading(false);
       }
     };
 
     fetchBlogs();
-  }, []);
+  }, [endpoint]);
 
   if (loading) {
     return (
@@ -107,11 +124,13 @@ function BlogList() {
     <div
       style={{
         fontFamily: "Doto, Kiwi Maru, Transparent",
-        maxWidth: "540px", /* 90% of 600px */
+        width: isMobile ? "100%" : "740px",
+        maxWidth: "100%",
         fontSize: "15.3px", /* 90% of 17px */
         wordBreak: "break-all",
         margin: "0 auto",
-        padding: "0.9rem", /* 90% of 1rem */
+        padding: isMobile ? "0 16px" : "0",
+        boxSizing: "border-box",
       }}
     >
       <link
@@ -125,7 +144,7 @@ function BlogList() {
       />
       <Box p="1" wordBreak="break-all">
         <Box display="flex">
-          <Link onClick={() => navigate("/")}>Back</Link>
+          <Link onClick={() => navigate("/")} color={linkColor}>Back</Link>
         </Box>
         <Box mt="2" width="100%">
           <Divider />
@@ -141,70 +160,89 @@ function BlogList() {
             marginTop: "9px", /* 90% of 10px */
           }}
         >
-          Thoughts
+          {title}
         </Text>
-        <Box mt="8">
-          {blogs.map((blog) => (
-            <Box
+        <Box mt="8" style={{ display: "grid", gap: "14px" }}>
+          {blogs.map((blog, index) => (
+            <motion.div
               key={blog.id}
-              p="4"
-              border="0.9px solid lightgray" /* 90% of 1px */
-              borderRadius="100%"
-              mb="4"
-              cursor="pointer"
-              onClick={() => navigate(`/blog/${blog.id}`)}
-              _hover={{ bg: "gray.50" }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2, delay: index * 0.03 }}
+              whileHover={{ scale: 1.01, transition: { duration: 0.1 } }}
               style={{
+                background: "white",
+                border: "1px solid lightgray",
+                borderRadius: "24px",
+                padding: "16px",
+                cursor: "pointer",
                 display: "flex",
-                flexDirection: "row",
-                gap: "14.4px", /* 90% of 16px */
-                alignItems: "center",
+                flexDirection: isMobile ? "column" : "row",
+                gap: "16px",
+                alignItems: isMobile ? "flex-start" : "center",
               }}
+              onClick={() => navigate(`${routeBase}/${blog.id}`)}
             >
               <img
                 src={blog.eyecatch.url}
                 alt={blog.title}
                 style={{
-                  width: "115.2px", /* 90% of 128px */
-                  height: "auto",
-                  borderRadius: "28.8px", /* 90% of 32px */
-                  marginBottom: "14.4px", /* 90% of 16px */
+                  width: isMobile ? "100%" : "100px",
+                  height: isMobile ? "180px" : "100px",
+                  border: "1px solid lightgray",
+                  borderRadius: "16px",
+                  objectFit: "cover",
                 }}
               />
               <div
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center",
+                  flex: 1,
+                  gap: "6px",
                 }}
               >
-                <Box display="flex" alignItems="center">
-                  <div
+                <Box display="flex" alignItems="center" gap="8px">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
                     style={{
-                      animation: "rotate 7s linear infinite",
-                      marginRight: "3.6px", /* 90% of 4px */
+                      fontSize: "20px",
                     }}
                   >
                     {blog.emoji}
-                  </div>
-                  <style>
-                    {`
-                    @keyframes rotate {
-                      from { transform: rotate(0deg); }
-                      to { transform: rotate(360deg); }
-                    }
-                  `}
-                  </style>
-                  <Text fontSize="xl" fontWeight="bold" color="gray">
+                  </motion.div>
+                  <Text 
+                    fontSize="xl" 
+                    fontWeight="bold" 
+                    color="gray.700"
+                  >
                     {blog.title}
                   </Text>
                 </Box>
-                <Text fontSize="sm" color="gray">
-                  {">"} published at{" "}
-                  {new Date(blog.publishedAt).toLocaleDateString()}
+                <Text 
+                  fontSize="sm" 
+                  color="gray.500"
+                >
+                  {new Date(blog.publishedAt).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                  })}
                 </Text>
               </div>
-            </Box>
+              {!isMobile && (
+                <motion.div
+                  whileHover={{ x: 3 }}
+                  style={{
+                    fontSize: "20px",
+                    color: "gray",
+                  }}
+                >
+                  →
+                </motion.div>
+              )}
+            </motion.div>
           ))}
         </Box>
       </Box>
@@ -212,4 +250,4 @@ function BlogList() {
   );
 }
 
-export default BlogList;
+export default GenericBlogList;

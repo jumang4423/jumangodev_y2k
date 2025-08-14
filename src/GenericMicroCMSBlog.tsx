@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Box, Divider, Spinner, Text } from "@chakra-ui/react";
+import { Box, Divider, Spinner, Text, useMediaQuery } from "@chakra-ui/react";
 import { createClient } from "microcms-js-sdk";
 import { motion } from "framer-motion";
 
@@ -21,14 +21,22 @@ const client = createClient({
   apiKey: "NrXtEm2HTvhho5hgmmmqCUmZwgEpGvqGp2x3",
 });
 
+interface GenericMicroCMSBlogProps {
+  endpoint: "blog" | "tech_blog";
+  routeBase: "/blog" | "/tech_blog";
+  linkColor: string;
+}
+
 function Link({
   children,
   onClick,
   disabled = false,
+  color = "gray",
 }: {
   children: React.ReactNode;
   onClick: () => void;
   disabled?: boolean;
+  color?: string;
 }) {
   return (
     <motion.button
@@ -36,7 +44,7 @@ function Link({
       whileHover={{ scale: disabled ? 1.0 : 1.125 }} /* 90% of 1.25 */
       style={{
         marginLeft: "5.4px", /* 90% of 6px */
-        color: "gray",
+        color: color,
         borderRadius: "100%",
         border: "0.9px solid lightgray", /* 90% of 1px */
         fontWeight: "normal",
@@ -51,16 +59,21 @@ function Link({
   );
 }
 
-function MicroCMSBlog() {
+function GenericMicroCMSBlog({ 
+  endpoint, 
+  routeBase, 
+  linkColor 
+}: GenericMicroCMSBlogProps) {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [blog, setBlog] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isMobile] = useMediaQuery("(max-width: 540px)");
 
   useEffect(() => {
     if (!id) {
-      setError("No blog ID provided.");
+      setError(`No ${endpoint === "blog" ? "blog" : "tech blog"} ID provided.`);
       setLoading(false);
       return;
     }
@@ -68,7 +81,7 @@ function MicroCMSBlog() {
     const fetchBlog = async () => {
       try {
         const data = await client.get({
-          endpoint: "blog",
+          endpoint: endpoint,
           contentId: id,
         });
         setBlog({
@@ -82,14 +95,14 @@ function MicroCMSBlog() {
         });
         window.scrollTo(0, 0);
       } catch (err) {
-        setError("Failed to fetch blog post.");
+        setError(`Failed to fetch ${endpoint === "blog" ? "blog" : "tech blog"} post.`);
       } finally {
         setLoading(false);
       }
     };
 
     fetchBlog();
-  }, [id]);
+  }, [id, endpoint]);
 
   if (loading) {
     return (
@@ -120,11 +133,13 @@ function MicroCMSBlog() {
     <div
       style={{
         fontFamily: "Doto, Kiwi Maru, Transparent",
-        maxWidth: "540px", /* 90% of 600px */
+        width: isMobile ? "100%" : "740px",
+        maxWidth: "100%",
         fontSize: "15.3px", /* 90% of 17px */
         wordBreak: "break-all",
         margin: "0 auto",
-        padding: "0.9rem", /* 90% of 1rem */
+        padding: isMobile ? "0 16px" : "0",
+        boxSizing: "border-box",
       }}
     >
       <link
@@ -138,7 +153,7 @@ function MicroCMSBlog() {
       />
       <Box p="1" wordBreak="break-all">
         <Box display="flex">
-          <Link onClick={() => navigate("/")}>Back</Link>
+          <Link onClick={() => navigate("/")} color={linkColor}>Back</Link>
         </Box>
         <Box mt="2" width="100%">
           <Divider />
@@ -202,4 +217,4 @@ function MicroCMSBlog() {
   );
 }
 
-export default MicroCMSBlog;
+export default GenericMicroCMSBlog;

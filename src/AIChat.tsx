@@ -152,15 +152,15 @@ const AIChat = () => {
             )}
           </InputRightElement>
           <Textarea
-            focusBorderColor="gray.200"
+            focusBorderColor="gray.100"
             height={"auto"}
             onCompositionStart={startComposition}
             onCompositionEnd={endComposition}
-            placeholder="ask to jumango ai..."
+            placeholder="ask jumango ai..."
             rows={Math.min(3, userInput.split("\n").length)} /* keep 3 rows max */
             h={"auto"}
             value={userInput}
-            rounded={"xl"} /* scale down rounding */
+            rounded={"2xl"} /* scale down rounding */
             onChange={(e) => setUserInput(e.target.value)}
             onKeyDown={(e) => {
               if (composing) {

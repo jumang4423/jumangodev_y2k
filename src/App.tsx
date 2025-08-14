@@ -8,6 +8,7 @@ const captcha = "/captcha.mp4";
 import AIChat from "./AIChat";
 import { useMediaQuery } from "@chakra-ui/react";
 import RecentBlogPosts from "./RecentBlogPosts";
+import RecentTechBlogPosts from "./RecentTechBlogPosts";
 
 const soft = [
   "treed-gpt",
@@ -266,6 +267,11 @@ function Description({ onPlay }: { onPlay: () => void }) {
       }}
     >
       <div style={{ marginTop: "14.4px" }}>
+        <Subtitle title="projects" />
+        <RecentTechBlogPosts onPlay={onPlay} />
+      </div>
+
+      <div style={{ marginTop: "7.2px" }}>
         <Subtitle title="music" />
         <div
           style={{
@@ -309,9 +315,6 @@ function Description({ onPlay }: { onPlay: () => void }) {
               <Link href="https://soundcloud.com/jumang4423/" onPlay={onPlay}>
                 soundcloud
               </Link>
-              <Link onPlay={onPlay} href="https://scrapbox.io/jumang4423/">
-                scrapbox
-              </Link>
               <Link onPlay={onPlay} href="https://github.com/jumang4423/">
                 github
               </Link>
@@ -340,7 +343,6 @@ function Description({ onPlay }: { onPlay: () => void }) {
         </div>
       </div>
 
-
       <div style={{ marginTop: "7.2px" }}> 
         <Subtitle title="software" />
         <div
@@ -356,7 +358,7 @@ function Description({ onPlay }: { onPlay: () => void }) {
         >
           {soft.map((m: string, i: number) => (
             <Link
-              href={`https://github.com/jumang4423/${m}`}
+              href={m === "power_tone" ? "https://github.com/jumang4423/power_tone_2010" : `https://github.com/jumang4423/${m}`}
               onPlay={onPlay}
               key={i}
             >

@@ -9,6 +9,9 @@ interface TechBlogPost {
   title: string;
   publishedAt: string;
   emoji: string;
+  eyecatch: {
+    url: string;
+  };
 }
 
 const client = createClient({
@@ -77,11 +80,12 @@ function RecentTechBlogPosts({ onPlay }: { onPlay: () => void }) {
         });
         setTechBlogs(
           data.contents.map(
-            (content: { id: string; title: string; publishedAt: string }) => ({
+            (content: { id: string; title: string; publishedAt: string; emoji: string; eyecatch: { url: string } }) => ({
               id: content.id,
               title: content.title,
               publishedAt: content.publishedAt,
               emoji: content.emoji,
+              eyecatch: content.eyecatch,
             })
           )
         );
@@ -104,40 +108,71 @@ function RecentTechBlogPosts({ onPlay }: { onPlay: () => void }) {
       style={{
         display: "flex",
         flexDirection: "row",
-        // border: "1px solid lightgray",
-        borderRadius: "100%",
         flexWrap: "wrap",
-        alignItems: "center",
-        gap: "0px 0px",
+        gap: "9px", /* 90% of 10px */
         maxWidth: "100%",
+        marginTop: "8px"
       }}
     >
       {techBlogs.map((techBlog) => (
-        <Link key={techBlog.id} to={`/tech_blog/${techBlog.id}`} onPlay={onPlay}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div
+        <motion.div
+          key={techBlog.id}
+          initial={{ scale: 1.0 }}
+          whileHover={{ scale: 1.05 }}
+          style={{
+            cursor: "pointer",
+            overflow: "hidden",
+            borderRadius: "18px", /* 90% of 20px */
+            border: "1.8px solid #eee", /* 90% of 2px */
+          }}
+        >
+          <RouterLink
+            to={`/tech_blog/${techBlog.id}`}
+            onClick={onPlay}
+            style={{
+              textDecoration: "none",
+              display: "block",
+            }}
+          >
+            <img
+              src={techBlog.eyecatch.url}
+              alt={techBlog.title}
               style={{
-                animation: "rotate 7s linear infinite",
-                marginRight: "3.6px", /* 90% of 4px */
+                width: "90px", /* 90% of 100px */
+                height: "90px", /* 90% of 100px */
+                objectFit: "cover",
+                display: "block",
               }}
-            >
-              {techBlog.emoji}
-            </div>
-            <style>
-              {`
-              @keyframes rotate {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-              }
-            `}
-            </style>
-            {techBlog.title}
-          </div>
-        </Link>
+            />
+          </RouterLink>
+        </motion.div>
       ))}
-      <Link to="/tech_blog" onPlay={onPlay}>
-        more...
-      </Link>
+      <motion.div
+        initial={{ scale: 1.0 }}
+        whileHover={{ scale: 1.05 }}
+        style={{
+          cursor: "pointer",
+          borderRadius: "18px", /* 90% of 20px */
+          border: "1.8px dashed #eee", /* 90% of 2px */
+          width: "90px", /* 90% of 100px */
+          height: "90px", /* 90% of 100px */
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <RouterLink
+          to="/tech_blog"
+          onClick={onPlay}
+          style={{
+            textDecoration: "none",
+            color: "gray",
+            fontSize: "12.6px", /* 90% of 14px */
+          }}
+        >
+          more...
+        </RouterLink>
+      </motion.div>
     </Box>
   );
 }

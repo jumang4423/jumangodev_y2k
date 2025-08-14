@@ -153,4 +153,35 @@ button:focus-visible {
     margin: 9px 0 3.6px 0; /* 90% of margins */
     font-weight: bold;
   }
+
+  pre {
+    border: 2px dotted lightgray;
+    border-radius: 16px;
+    padding: 14.4px; /* 90% of 16px */
+    margin: 14.4px 0; /* 90% of 16px */
+    background-color: #f9f9f9;
+    overflow-x: auto;
+  }
+
+  code {
+    border: 1px dotted lightgray;
+    border-radius: 8px;
+    padding: 2px 6px;
+    background-color: #f9f9f9;
+    font-family: 'Iosevka', monospace;
+    font-size: 0.9em;
+  }
+
+  pre code {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+  }
+
+  blockquote {
+    border: 2px dotted lightgray;
+    border-radius: 24px;
+    padding: 14.4px; /* 90% of 16px */
+    margin: 14.4px 0; /* 90% of 16px */
+  }
 }

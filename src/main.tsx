@@ -3,10 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import App from "./App.tsx";
 import "./index.css";
-import BlogList from "./BlogList.tsx";
-import MicroCMSBlog from "./MicroCMSBlog.tsx";
-import TechBlogList from "./TechBlogList.tsx";
-import MicroCMSTechBlog from "./MicroCMSTechBlog.tsx";
+import GenericBlogList from "./GenericBlogList.tsx";
+import GenericMicroCMSBlog from "./GenericMicroCMSBlog.tsx";
 
 const pinkTheme = extendTheme({
   config: {
@@ -89,19 +87,39 @@ const router = createBrowserRouter([
   },
   {
     path: "/blog",
-    element: <BlogList />,
+    element: <GenericBlogList 
+      endpoint="blog" 
+      routeBase="/blog" 
+      title="thoughts" 
+      linkColor="gray" 
+      borderWidth="0.9px" 
+    />,
   },
   {
     path: "/blog/:id",
-    element: <MicroCMSBlog />,
+    element: <GenericMicroCMSBlog 
+      endpoint="blog" 
+      routeBase="/blog" 
+      linkColor="gray" 
+    />,
   },
   {
     path: "/tech_blog",
-    element: <TechBlogList />,
+    element: <GenericBlogList 
+      endpoint="tech_blog" 
+      routeBase="/tech_blog" 
+      title="projects" 
+      linkColor="black" 
+      borderWidth="1px" 
+    />,
   },
   {
     path: "/tech_blog/:id",
-    element: <MicroCMSTechBlog />,
+    element: <GenericMicroCMSBlog 
+      endpoint="tech_blog" 
+      routeBase="/tech_blog" 
+      linkColor="black" 
+    />,
   },
 ]);
 

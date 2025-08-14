@@ -104,12 +104,11 @@ function RecentBlogPosts({ onPlay }: { onPlay: () => void }) {
       style={{
         display: "flex",
         flexDirection: "row",
-        // border: "1px solid lightgray",
         borderRadius: "100%",
         flexWrap: "wrap",
         alignItems: "center",
         gap: "0px 0px",
-        maxWidth: "100%",
+        maxWidth: "740px",
       }}
     >
       {blogs.map((blog) => (
