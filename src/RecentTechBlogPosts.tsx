@@ -76,7 +76,7 @@ function RecentTechBlogPosts({ onPlay }: { onPlay: () => void }) {
       try {
         const data = await client.get({
           endpoint: "tech_blog",
-          queries: { limit: 5 },
+          queries: { limit: 100 },
         });
         setTechBlogs(
           data.contents.map(
@@ -147,32 +147,6 @@ function RecentTechBlogPosts({ onPlay }: { onPlay: () => void }) {
           </RouterLink>
         </motion.div>
       ))}
-      <motion.div
-        initial={{ scale: 1.0 }}
-        whileHover={{ scale: 1.05 }}
-        style={{
-          cursor: "pointer",
-          borderRadius: "18px", /* 90% of 20px */
-          border: "1.8px dashed #eee", /* 90% of 2px */
-          width: "90px", /* 90% of 100px */
-          height: "90px", /* 90% of 100px */
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <RouterLink
-          to="/tech_blog"
-          onClick={onPlay}
-          style={{
-            textDecoration: "none",
-            color: "gray",
-            fontSize: "12.6px", /* 90% of 14px */
-          }}
-        >
-          more...
-        </RouterLink>
-      </motion.div>
     </Box>
   );
 }
