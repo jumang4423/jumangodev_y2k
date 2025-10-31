@@ -9,6 +9,7 @@ import AIChat from "./AIChat";
 import { useMediaQuery } from "@chakra-ui/react";
 import RecentBlogPosts from "./RecentBlogPosts";
 import RecentTechBlogPosts from "./RecentTechBlogPosts";
+import AdBlockModal from "./AdBlockModal";
 
 const soft = [
   "treed-gpt",
@@ -467,6 +468,7 @@ function App() {
         href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap"
         rel="stylesheet"
       />
+      <AdBlockModal />
       <Header onPlay={onPlay} />
       <AIChat />
       <Description onPlay={onPlay} />
