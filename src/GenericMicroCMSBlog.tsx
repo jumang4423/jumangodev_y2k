@@ -1,6 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Box, Divider, Spinner, Text, useMediaQuery } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Divider,
+  Spinner,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { createClient } from "microcms-js-sdk";
 import { motion } from "framer-motion";
 
@@ -14,6 +25,7 @@ interface BlogPost {
   eyecatch: {
     url: string;
   };
+  ai_summary?: string;
 }
 
 const client = createClient({
@@ -92,6 +104,7 @@ function GenericMicroCMSBlog({
           updatedAt: data.updatedAt,
           emoji: data.emoji,
           eyecatch: data.eyecatch,
+          ai_summary: data.ai_summary,
         });
         window.scrollTo(0, 0);
       } catch (err) {
@@ -204,6 +217,37 @@ function GenericMicroCMSBlog({
             }}
           />
         </Box>
+        {blog.ai_summary && (
+          <Accordion allowToggle mb="14.4px">
+            <AccordionItem
+              border="0.9px solid lightgray"
+              borderRadius="18px"
+              bg="gray.50"
+            >
+              <AccordionButton
+                _focus={{ boxShadow: "none", outline: "none" }}
+                _focusVisible={{ boxShadow: "none", outline: "none" }}
+                _hover={{ bg: "transparent" }}
+                _active={{ bg: "transparent", outline: "none", boxShadow: "none" }}
+                style={{ border: "none", outline: "none", boxShadow: "none" }}
+              >
+                <Box flex="1" textAlign="left" color="black">
+                  ai summary
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel pb={4}>
+                <div
+                  dangerouslySetInnerHTML={{ __html: blog.ai_summary }}
+                  style={{
+                    color: "black",
+                    lineHeight: "1.6",
+                  }}
+                />
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+        )}
         <div
           className="blog_html"
           dangerouslySetInnerHTML={{ __html: blog.content }}
