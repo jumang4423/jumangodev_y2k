@@ -107,6 +107,14 @@ button:focus-visible {
     margin: 14.4px 0; /* 90% of 16px */
   }
 
+  iframe,
+  embed,
+  video {
+    border-radius: 28.8px !important; /* Match image rounding */
+    border: none !important;
+    overflow: hidden;
+  }
+
   h1 {
     font-size: 1.62em; /* 90% of 1.8em */
     line-height: 1.2;

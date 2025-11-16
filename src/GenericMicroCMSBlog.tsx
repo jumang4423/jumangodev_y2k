@@ -238,6 +238,7 @@ function GenericMicroCMSBlog({
               </AccordionButton>
               <AccordionPanel pb={4}>
                 <div
+                  className="blog_html"
                   dangerouslySetInnerHTML={{ __html: blog.ai_summary }}
                   style={{
                     color: "black",
