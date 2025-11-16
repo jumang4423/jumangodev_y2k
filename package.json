@@ -18,7 +18,7 @@
     "@emotion/react": "^11.12.0",
     "@emotion/styled": "^11.12.0",
     "bech32": "^2.0.0",
-    "cohere-ai": "^7.11.0",
+    "cohere-ai": "^7.18.1",
     "framer-motion": "^10.16.4",
     "ldrs": "^1.0.2",
     "microcms-js-sdk": "^3.1.2",

@@ -1,6 +1,6 @@
 import AnimalesePlayer from "./AnimalesePlayer";
 import { useState } from "react";
-import { CohereClient } from "cohere-ai";
+import { CohereClientV2 } from "cohere-ai";
 import {
   Box,
   InputGroup,
@@ -22,7 +22,7 @@ const cohere_keys = [
 const get_cohere = () => {
   const cohere_key =
     cohere_keys[Math.floor(Math.random() * cohere_keys.length)];
-  const cohere = new CohereClient({
+  const cohere = new CohereClientV2({
     token: cohere_key,
   });
   return cohere;
@@ -86,43 +86,67 @@ const AIChat = () => {
     const userInputCP = structuredClone(userInput);
     setUserInput("");
     const msgPtr = structuredClone(trimArray(msgArr, 5));
-
-    const w_system = [
-      {
-        role: "System",
-        message: SYSTEM_PROMPT,
-      },
-      ...msgPtr,
-    ];
     try {
       const cohere = get_cohere();
-      const stream = await cohere.chatStream({
-        model: "command-r-plus",
-        message: userInputCP,
-        chatHistory: w_system,
-        documents: documents,
-      });
+      const payload = {
+        // command-r-plus alias was shut down on 2025-09-15; use current active model
+        model: "command-a-03-2025",
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          ...msgPtr.map((m) => ({
+            role: m.role === "User" ? "user" : "assistant",
+            content: m.message,
+          })),
+          { role: "user", content: userInputCP },
+        ],
+        documents: documents.map((doc: any) =>
+          typeof doc === "string"
+            ? doc
+            : doc?.snippet || doc?.title
+            ? `${doc?.title ?? ""} ${doc?.snippet ?? ""}`.trim()
+            : JSON.stringify(doc)
+        ),
+      };
+
       msgPtr.push({
         role: "User",
         message: userInputCP,
       });
       setMsgArr(structuredClone(msgPtr));
 
-      for await (const chat of stream) {
-        if (chat.eventType === "text-generation") {
-          if (msgPtr[msgPtr.length - 1].role !== "Chatbot") {
-            msgPtr.push({
-              role: "Chatbot",
-              message: "",
-            });
-          }
+      try {
+        const stream = await cohere.chatStream(payload);
+        for await (const chat of stream) {
+          if (chat.type === "content-delta") {
+            const textDelta = chat.delta?.message?.content?.text || "";
+            if (msgPtr[msgPtr.length - 1].role !== "Chatbot") {
+              msgPtr.push({
+                role: "Chatbot",
+                message: "",
+              });
+            }
 
-          msgPtr[msgPtr.length - 1].message += chat.text;
-          setLatestAIResponse(chat.text);
-          setMsgArr(structuredClone(msgPtr));
+            msgPtr[msgPtr.length - 1].message += textDelta;
+            setLatestAIResponse(textDelta);
+            setMsgArr(structuredClone(msgPtr));
+          }
         }
+      } catch (e) {
+        console.error("chatStream failed, falling back to non-stream chat", e);
+        const resp = await cohere.chat(payload);
+        const fullText =
+          resp.message?.content
+            ?.map((c: any) => (c.type === "text" ? c.text : ""))
+            .join("") || "";
+        msgPtr.push({
+          role: "Chatbot",
+          message: fullText,
+        });
+        setLatestAIResponse(fullText);
+        setMsgArr(structuredClone(msgPtr));
       }
-    } catch {
+    } catch (e) {
+      console.error("jumango ai unavailable ;<", e);
       alert("jumango ai unavailable ;<");
     }
     setIsSubmitting(false);
